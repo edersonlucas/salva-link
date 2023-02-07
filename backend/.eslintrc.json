@@ -18,6 +18,28 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "quotes": [2, "single", { "avoidEscape": true }]
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "no-console": "off",
+    "import/no-extraneous-dependencies": ["off"],
+    "import/no-import-module-exports": [
+      "error",
+      {
+        "exceptions": ["**/*.ts"]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

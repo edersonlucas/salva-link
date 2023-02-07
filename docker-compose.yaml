@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  database:
+    image: mysql:8.0.21
+    container_name: database
+    platform: linux/x86_64
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    env_file: .env
+    restart: "always"
+    networks:
+      - salvalink_net
+
+  backend:
+    build: ./backend
+    container_name: backend
+    working_dir: /backend
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    env_file: .env
+    platform: linux/x86_64
+    depends_on:
+      - database
+    networks:
+      - salvalink_net
+    restart: always
+
+networks:
+  salvalink_net:
+    driver: bridge

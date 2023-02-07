@@ -1,0 +1,10 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#045f8d",
+    "titleBar.activeBackground": "#04A4F6",
+    "titleBar.activeForeground": "#EFFEF6"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.workingDirectories": ["backend", "frontend"]
+}

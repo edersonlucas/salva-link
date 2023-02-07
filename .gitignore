@@ -1,0 +1,12 @@
+/backend/node_modules
+/backend/dist
+/backend/build
+/backend/.env
+/backend/.nyc_output
+
+/frontend/node_modules
+/frontend/dist
+/frontend/build
+/frontend/.env
+
+.env

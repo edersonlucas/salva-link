@@ -11,4 +11,9 @@ const loginSchema = Joi.object({
   password: Joi.string().min(3).required(),
 });
 
-export { registerSchema, loginSchema };
+const linkSchema = Joi.object({
+  title: Joi.string().min(3).required(),
+  link: Joi.string().min(5).required(),
+});
+
+export { registerSchema, loginSchema, linkSchema };

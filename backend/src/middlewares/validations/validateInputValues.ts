@@ -1,8 +1,9 @@
 import { ValidationError } from 'joi';
-import { registerSchema, loginSchema } from './schemas';
+import { registerSchema, loginSchema, linkSchema } from './schemas';
 import ErrorGenerator from '../../utils/ErrorGenerator';
 import LoginDTO from '../../dto/LoginDTO';
 import RegisterDTO from '../../dto/RegisterDTO';
+import LinkDTO from '../../dto/LinkDTO';
 
 const returnError = (error: ValidationError) => {
   if (error) {
@@ -22,4 +23,9 @@ const validateRegister = (data: RegisterDTO): void => {
   returnError(error);
 };
 
-export { validateRegister, validateLogin };
+const validateLink = (data: Omit<LinkDTO, 'userId'>): void => {
+  const { error } = linkSchema.validate(data);
+  returnError(error);
+};
+
+export { validateRegister, validateLogin, validateLink };

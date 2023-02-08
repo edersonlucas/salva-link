@@ -1,0 +1,4 @@
+const tokenMock =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiZWRlcnNvbmx1Y2FzIiwiZW1haWwiOiJlZGVyc29ubHVjYXNAb3V0bG9vay5jb20iLCJpYXQiOjE2NzU4MjM0MTIsImV4cCI6MTY3NTkwOTgxMn0.1daX83A_xTLo9Qul1AeKjczjFUHzVend_jqnYkSvTF8';
+
+export default tokenMock;

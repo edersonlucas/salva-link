@@ -7,5 +7,11 @@ const linkRouter = Router();
 
 linkRouter
   .get('/', AuthMiddleware.auth, new LinkController().getAll)
+  .post(
+    '/',
+    AuthMiddleware.auth,
+    LinkValidationMiddleware.validate,
+    new LinkController().create,
+  )
 
 export default linkRouter;

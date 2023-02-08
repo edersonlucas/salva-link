@@ -18,7 +18,7 @@ export default class AuthService {
     return user;
   }
 
-  public async login(data: LoginDTO) {
+  public async login(data: LoginDTO): Promise<string> {
     const { email, password } = data;
     const user = await this.getUserByEmail(email);
     if (!user) throw new ErrorGenerator(401, 'Incorrect email or password');
@@ -35,7 +35,7 @@ export default class AuthService {
     throw new ErrorGenerator(401, 'Incorrect email or password');
   }
 
-  public async register(data: RegisterDTO) {
+  public async register(data: RegisterDTO): Promise<string> {
     const { username, email, password } = data;
     const emailAlreadyExist = await this.getUserByEmail(email);
     if (emailAlreadyExist)

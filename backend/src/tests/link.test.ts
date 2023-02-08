@@ -7,9 +7,9 @@ import { Response } from 'superagent';
 import Link from '../database/models/Link';
 import app from '../app';
 
-import { findAllMock } from './mocks/link.mock';
+import { createMock, findAllMock } from './mocks/link.mock';
 import tokenMock from './mocks/token.mock';
-import { tokenInvalid } from './mocks/responses.mock';
+import { linkAlreadyRegistered, tokenInvalid } from './mocks/responses.mock';
 
 chai.use(chaiHttp);
 
@@ -46,6 +46,76 @@ describe('GET /link', () => {
       const httpResponse: Response = await chai
         .request(app)
         .get('/link')
+        .set('Authorization', 'invalid');
+      expect(httpResponse.status).to.equal(401);
+      expect(httpResponse.body).to.deep.equal(tokenInvalid);
+    });
+  });
+});
+
+describe('POST /link', () => {
+  describe('It is possible register a new link successfully using a valid token', () => {
+    beforeEach(async () => {
+      sinon.stub(Link, 'findAll').resolves(null);
+      sinon.stub(Link, 'create').resolves(createMock as Link);
+      sinon.stub(JWT, 'verify').resolves(tokenMock);
+    });
+    afterEach(() => {
+      (Link.findAll as sinon.SinonStub).restore();
+      (Link.create as sinon.SinonStub).restore();
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 201 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .post('/link')
+        .set('Authorization', tokenMock)
+        .send({
+          title: 'OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023',
+          link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
+        });
+      expect(httpResponse.status).to.equal(201);
+      expect(httpResponse.body).to.deep.equal({
+        title: createMock.title,
+        link: createMock.link,
+      });
+    });
+  });
+
+  describe('It is not possible to register a link already registered by the user', () => {
+    beforeEach(async () => {
+      sinon.stub(Link, 'findOne').resolves(createMock as Link);
+      sinon.stub(JWT, 'verify').resolves(tokenMock);
+    });
+    afterEach(() => {
+      (Link.findOne as sinon.SinonStub).restore();
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 409 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .post('/link')
+        .set('Authorization', tokenMock)
+        .send({
+          title: 'OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023',
+          link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
+        });
+      expect(httpResponse.status).to.equal(409);
+      expect(httpResponse.body).to.deep.equal(linkAlreadyRegistered);
+    });
+  });
+
+  describe('Unable to successfully register a new link using an invalid token', () => {
+    beforeEach(async () => {
+      sinon.stub(JWT, 'verify').throws(new Error('Invalid token!'));
+    });
+    afterEach(() => {
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 401 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .post('/link')
         .set('Authorization', 'invalid');
       expect(httpResponse.status).to.equal(401);
       expect(httpResponse.body).to.deep.equal(tokenInvalid);

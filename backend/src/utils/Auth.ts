@@ -11,13 +11,13 @@ export default class Auth {
   }
 
   public authentication(payload: UserPayloadDTO): string {
-    const token = sign(payload, this.secretJwt, { expiresIn: '1d' }) as string;
+    const token = sign(payload, this.secretJwt, { expiresIn: '1d' });
     return token;
   }
 
-  public authorization(token: string): UserPayloadDTO {
+  public authorization(token: string) {
     try {
-      const payload = verify(token, this.secretJwt) as UserPayloadDTO;
+      const payload = verify(token, this.secretJwt);
       return payload;
     } catch (err) {
       throw new ErrorGenerator(400, 'Invalid token');

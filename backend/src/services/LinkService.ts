@@ -16,7 +16,7 @@ export default class LinkService {
   public async getAll(userId: number): Promise<ILink[]> {
     const links = await this.model.findAll({
       where: { userId },
-      attributes: ['title', 'link'],
+      attributes: ['title', 'link', 'id'],
     });
     return links;
   }

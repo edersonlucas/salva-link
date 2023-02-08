@@ -27,6 +27,7 @@ export default class LinkService {
       throw new ErrorGenerator(409, 'You already saved this link');
     const newLink = await this.model.create({ ...data, userId });
     return {
+      id: newLink.id,
       title: newLink.title,
       link: newLink.link,
     };

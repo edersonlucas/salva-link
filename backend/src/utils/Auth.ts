@@ -11,7 +11,7 @@ export default class Auth {
   }
 
   public Authentication(payload: UserPayloadDTO): string {
-    const token = sign(payload, this.secretJwt) as string;
+    const token = sign(payload, this.secretJwt, { expiresIn: '1d' }) as string;
     return token;
   }
 

@@ -9,7 +9,11 @@ import app from '../app';
 
 import { createMock, findAllMock } from './mocks/link.mock';
 import tokenMock from './mocks/token.mock';
-import { linkAlreadyRegistered, tokenInvalid } from './mocks/responses.mock';
+import {
+  failedUpdateLink,
+  linkAlreadyRegistered,
+  tokenInvalid,
+} from './mocks/responses.mock';
 
 chai.use(chaiHttp);
 
@@ -117,6 +121,75 @@ describe('POST /link', () => {
         .request(app)
         .post('/link')
         .set('Authorization', 'invalid');
+      expect(httpResponse.status).to.equal(401);
+      expect(httpResponse.body).to.deep.equal(tokenInvalid);
+    });
+  });
+});
+
+describe('PUT /link', () => {
+  describe('Is it possible to update a link successfully using a valid token', () => {
+    beforeEach(async () => {
+      sinon.stub(Link, 'update').resolves([1]);
+      sinon.stub(JWT, 'verify').resolves(tokenMock);
+    });
+    afterEach(() => {
+      (Link.update as sinon.SinonStub).restore();
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 204 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .put('/link/1')
+        .set('Authorization', tokenMock)
+        .send({
+          title: 'OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023',
+          link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
+        });
+      expect(httpResponse.status).to.equal(204);
+      expect(httpResponse.body).to.deep.equal({});
+    });
+  });
+
+  describe('Unable to update a link without making any changes', () => {
+    beforeEach(async () => {
+      sinon.stub(Link, 'update').resolves([0]);
+      sinon.stub(JWT, 'verify').resolves(tokenMock);
+    });
+    afterEach(() => {
+      (Link.update as sinon.SinonStub).restore();
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 400 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .put('/link/1')
+        .set('Authorization', tokenMock)
+        .send({
+          title: 'OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023',
+          link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
+        });
+      expect(httpResponse.status).to.equal(400);
+      expect(httpResponse.body).to.deep.equal(failedUpdateLink);
+    });
+  });
+
+  describe('Unable to successfully update a link using an invalid token', () => {
+    beforeEach(async () => {
+      sinon.stub(JWT, 'verify').throws(new Error('Invalid token!'));
+    });
+    afterEach(() => {
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 401 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .put('/link/1')
+        .set('Authorization', tokenMock)
+        .send({
+          title: 'OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023',
+          link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
+        });
       expect(httpResponse.status).to.equal(401);
       expect(httpResponse.body).to.deep.equal(tokenInvalid);
     });

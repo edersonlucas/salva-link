@@ -10,6 +10,7 @@ import app from '../app';
 import { createMock, findAllMock } from './mocks/link.mock';
 import tokenMock from './mocks/token.mock';
 import {
+  failedRemoveLink,
   failedUpdateLink,
   linkAlreadyRegistered,
   tokenInvalid,
@@ -124,7 +125,7 @@ describe('POST /link', () => {
   });
 });
 
-describe('PUT /link', () => {
+describe('PUT /link/:id', () => {
   describe('Is it possible to update a link successfully using a valid token', () => {
     beforeEach(async () => {
       sinon.stub(Link, 'update').resolves([1]);
@@ -187,6 +188,63 @@ describe('PUT /link', () => {
           title: 'OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023',
           link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
         });
+      expect(httpResponse.status).to.equal(401);
+      expect(httpResponse.body).to.deep.equal(tokenInvalid);
+    });
+  });
+});
+
+describe('DELETE /link/:id', () => {
+  describe('Is it possible to successfully delete a link using a valid token', () => {
+    beforeEach(async () => {
+      sinon.stub(Link, 'destroy').resolves(1);
+      sinon.stub(JWT, 'verify').resolves(tokenMock);
+    });
+    afterEach(() => {
+      (Link.destroy as sinon.SinonStub).restore();
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 204 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .delete('/link/1')
+        .set('Authorization', tokenMock);
+      expect(httpResponse.status).to.equal(204);
+      expect(httpResponse.body).to.deep.equal({});
+    });
+  });
+
+  describe('Unable to delete a link with non-existent id', () => {
+    beforeEach(async () => {
+      sinon.stub(Link, 'destroy').resolves(0);
+      sinon.stub(JWT, 'verify').resolves(tokenMock);
+    });
+    afterEach(() => {
+      (Link.destroy as sinon.SinonStub).restore();
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 400 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .delete('/link/54')
+        .set('Authorization', tokenMock);
+      expect(httpResponse.status).to.equal(400);
+      expect(httpResponse.body).to.deep.equal(failedRemoveLink);
+    });
+  });
+
+  describe('Unable to successfully delete a link using an invalid token', () => {
+    beforeEach(async () => {
+      sinon.stub(JWT, 'verify').throws(new Error('Invalid token!'));
+    });
+    afterEach(() => {
+      (JWT.verify as sinon.SinonStub).restore();
+    });
+    it('Should return a 401 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .delete('/link/1')
+        .set('Authorization', tokenMock);
       expect(httpResponse.status).to.equal(401);
       expect(httpResponse.body).to.deep.equal(tokenInvalid);
     });

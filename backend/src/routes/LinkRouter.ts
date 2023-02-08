@@ -13,5 +13,11 @@ linkRouter
     LinkValidationMiddleware.validate,
     new LinkController().create,
   )
+  .put(
+    '/:id',
+    AuthMiddleware.auth,
+    LinkValidationMiddleware.validate,
+    new LinkController().update,
+  )
 
 export default linkRouter;

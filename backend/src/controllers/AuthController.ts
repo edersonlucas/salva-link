@@ -22,7 +22,7 @@ export default class AuthController {
   public async register(req: Request, res: Response, next: NextFunction) {
     try {
       const token = await this.service.register(req.body);
-      return res.status(200).json({ token });
+      return res.status(201).json({ token });
     } catch (err) {
       return next(err);
     }

@@ -79,10 +79,7 @@ describe('POST /link', () => {
           link: 'https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/',
         });
       expect(httpResponse.status).to.equal(201);
-      expect(httpResponse.body).to.deep.equal({
-        title: createMock.title,
-        link: createMock.link,
-      });
+      expect(httpResponse.body).to.deep.equal(createMock);
     });
   });
 

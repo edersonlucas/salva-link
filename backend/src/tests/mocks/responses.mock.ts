@@ -1,4 +1,11 @@
 const incorrectEmailOrPassword = { message: 'Incorrect email or password' };
 const emailAlreadyRegistered = { message: 'This email is already registered.' };
+const tokenInvalid = { message: 'Token must be a valid token' };
+const linkAlreadyRegistered = { message: 'You already saved this link' };
 
-export { incorrectEmailOrPassword, emailAlreadyRegistered };
+export {
+  incorrectEmailOrPassword,
+  emailAlreadyRegistered,
+  tokenInvalid,
+  linkAlreadyRegistered,
+};

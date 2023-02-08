@@ -38,7 +38,7 @@ describe('POST /login', () => {
     });
   });
 
-  describe('It is possible to login successfully with incorrect data', () => {
+  describe('Unable to login successfully with incorrect data', () => {
     beforeEach(async () => {
       sinon.stub(User, 'findOne').resolves(findOneMock as User);
     });

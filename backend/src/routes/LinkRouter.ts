@@ -19,5 +19,6 @@ linkRouter
     LinkValidationMiddleware.validate,
     new LinkController().update,
   )
+  .delete('/:id', AuthMiddleware.auth, new LinkController().remove);
 
 export default linkRouter;

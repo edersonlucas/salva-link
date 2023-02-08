@@ -5,5 +5,11 @@ const findOneMock = {
   password: '$2y$10$z7ToCdZ2KDmrqxf4auUPa.jCx2euQkfrld57l/6SU4vCS4GTSCO4C',
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { findOneMock };
+const createMock = {
+  id: 2,
+  username: 'joaozinho',
+  email: 'joaozinho@gmail.com',
+  password: '$2y$10$gDzp7Oez0cvzPt50k7NyNOEAsbbXrw5Bjdz1bSBckWU71mtjtsB0e',
+};
+
+export { findOneMock, createMock };

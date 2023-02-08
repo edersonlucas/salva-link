@@ -1,4 +1,4 @@
 const incorrectEmailOrPassword = { message: 'Incorrect email or password' };
+const emailAlreadyRegistered = { message: 'This email is already registered.' };
 
-// eslint-disable-next-line import/prefer-default-export
-export { incorrectEmailOrPassword };
+export { incorrectEmailOrPassword, emailAlreadyRegistered };

@@ -10,12 +10,12 @@ export default class Auth {
     this.secretJwt = process.env.JWT_SECRET;
   }
 
-  public Authentication(payload: UserPayloadDTO): string {
+  public authentication(payload: UserPayloadDTO): string {
     const token = sign(payload, this.secretJwt, { expiresIn: '1d' }) as string;
     return token;
   }
 
-  public Authorization(token: string): UserPayloadDTO {
+  public authorization(token: string): UserPayloadDTO {
     try {
       const payload = verify(token, this.secretJwt) as UserPayloadDTO;
       return payload;

@@ -17,7 +17,7 @@ export default class AuthMiddleware {
     }
 
     try {
-      const user = new Auth().Authorization(token);
+      const user = new Auth().authorization(token);
       req.user = user;
       next();
     } catch (_err) {

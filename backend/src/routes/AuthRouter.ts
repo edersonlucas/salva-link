@@ -6,10 +6,14 @@ import RegisterValidationMiddleware from '../middlewares/RegisterValidationMiddl
 const authRouter = Router();
 
 authRouter
-  .post('/login', LoginValidationMiddleware.login, new AuthController().login)
+  .post(
+    '/login',
+    LoginValidationMiddleware.validate,
+    new AuthController().login,
+  )
   .post(
     '/register',
-    RegisterValidationMiddleware.register,
+    RegisterValidationMiddleware.validate,
     new AuthController().register,
   );
 

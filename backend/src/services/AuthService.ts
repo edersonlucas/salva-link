@@ -29,7 +29,7 @@ export default class AuthService {
         username: user.username,
         email: user.email,
       };
-      const token = new Auth().Authentication(payload);
+      const token = new Auth().authentication(payload);
       return token;
     }
     throw new ErrorGenerator(401, 'Incorrect email or password');
@@ -51,7 +51,7 @@ export default class AuthService {
       username: user.username,
       email: user.email,
     };
-    const token = new Auth().Authentication(payload);
+    const token = new Auth().authentication(payload);
     return token;
   }
 }

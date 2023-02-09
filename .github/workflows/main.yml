@@ -4,32 +4,32 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - name: Verifica o repositório do Git.
+      - name: Check the Git repository.
         uses: actions/checkout@v2
 
-      - name: Instala o node com a versão.
+      - name: Install node with version.
         uses: actions/setup-node@v1
         with:
           node-version: 16
 
-      - name: Instalando as dependências.
+      - name: Installing the dependencies.
         run: npm install --prefix ./backend
 
-      - name: Executando o lint para verificar se a erros.
+      - name: Running lint to check for errors.
         run: npx eslint ./backend/src --ext .ts
   tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Verifica o repositório do Git
+      - name: Check the Git repository
         uses: actions/checkout@v2
 
-      - name: Instala o node com a versão
+      - name: Install node with version.
         uses: actions/setup-node@v1
         with:
           node-version: 16
 
-      - name: instalando as dependências
+      - name: Installing the dependencies.
         run: npm install --prefix ./backend
 
-      - name: Executando os tests de integração.
+      - name: Running the integration tests.
         run: npm run test --prefix ./backend

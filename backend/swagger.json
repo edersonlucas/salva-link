@@ -1,0 +1,733 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API SalvaLink",
+    "description": "Documentação da API SalvaLink",
+    "contact": {
+      "email": "edersonlucas@outlook.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Realizar Login",
+        "description": "Essa rota será a responsável por realizar login no sistema",
+        "tags": ["Login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginData"
+              },
+              "example": {
+                "email": "edersonlucas@outlook.com",
+                "password": "123456"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiZWRlcnNvbmx1Y2FzIiwiZW1haWwiOiJlZGVyc29ubHVjYXNAb3V0bG9vay5jb20iLCJpYXQiOjE2NzU4OTg2NzgsImV4cCI6MTY3NTk4NTA3OH0.EF4Q82rmPHrWjGgqxkSea17tBymd1qou36fma5nnvAQ"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "\"email\" is required"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Incorrect email or password"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "\"email\" must be a valid email"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "Realizar cadastro de novo usuário",
+        "description": "Essa rota será a responsável por realizar cadastro de novo usuário no sistema",
+        "tags": ["Register"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterData"
+              },
+              "example": {
+                "username": "edersonlucas",
+                "email": "edersonlucas@outlook.com",
+                "password": "123456"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiZWRlcnNvbmx1Y2FzIiwiZW1haWwiOiJlZGVyc29ubHVjYXNAb3V0bG9vay5jb20iLCJpYXQiOjE2NzU4OTg2NzgsImV4cCI6MTY3NTk4NTA3OH0.EF4Q82rmPHrWjGgqxkSea17tBymd1qou36fma5nnvAQ"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "\"username\" is required"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "This email is already registered."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "\"email\" must be a valid email"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/link": {
+      "get": {
+        "summary": "Busca os links",
+        "description": "Essa rota será a responsável por buscar os links do usuário logado no sistema.",
+        "tags": ["Link"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                },
+                "example": [
+                  {
+                    "title": "Trabalhando com arrays em Javascript",
+                    "link": "https://devgo.com.br/trabalhando-com-arrays-em-javascript",
+                    "id": 1
+                  },
+                  {
+                    "title": "10 extensões do Visual Studio Code para facilitar o seu dia a dia.",
+                    "link": "https://devgo.com.br/10-extensoes-do-visual-studio-code-para-facilitar-o-seu-dia-a-dia",
+                    "id": 2
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastra link",
+        "description": "Essa rota será a responsável por cadastrar um novo link para o usuário logado no sistema.",
+        "tags": ["Link"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkData"
+              },
+              "example": {
+                "title": "OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023",
+                "link": "https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Link"
+                },
+                "example": {
+                  "title": "OITO TENDÊNCIAS DE TECNOLOGIA PARA 2023",
+                  "link": "https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/",
+                  "id": 3
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "You already saved this link"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/link/{id}": {
+      "put": {
+        "summary": "Atualizar link",
+        "description": "Essa rota será a responsável por atualizar um link para o usuário logado no sistema.",
+        "tags": ["Link"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "require": true,
+            "description": "O link ID"
+          }
+        ],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkData"
+              },
+              "example": {
+                "title": "OITO TENDÊNCIAS DE TECNOLOGIA PARA 2024",
+                "link": "https://ravel.com.br/blog/oito-tendencias-de-tecnologia-para-2023/"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Failed to update link"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar link",
+        "description": "Essa rota será a responsável por deletar um link para o usuário logado no sistema.",
+        "tags": ["Link"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "require": true,
+            "description": "O link ID"
+          }
+        ],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Failed to remove link"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog/devgo": {
+      "get": {
+        "summary": "Busca os links do blog devGo",
+        "description": "Essa rota será a responsável por buscas os links do blog devGo para o usuário logado no sistema.",
+        "tags": ["Blog"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                },
+                "example": [
+                  {
+                    "title": "Entendendo Hooks no React",
+                    "link": "https://devgo.com.br/entendendo-hooks-no-react"
+                  },
+                  {
+                    "title": "Boas práticas para desenvolvimento de uma API Rest",
+                    "link": "https://devgo.com.br/boas-praticas-para-desenvolvimento-de-uma-api-rest"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog/trybe": {
+      "get": {
+        "summary": "Busca os links do blog da Trybe",
+        "description": "Essa rota será a responsável por buscas os links do blog da Trybe para o usuário logado no sistema.",
+        "tags": ["Blog"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                },
+                "example": [
+                  {
+                    "title": "5 exemplos de algoritmos na vida real e na computação",
+                    "link": "https://blog.betrybe.com/tecnologia/exemplos-de-algoritmos/"
+                  },
+                  {
+                    "title": "TrybeTalks — Gaules: os ensinamentos de um dos maiores streamers do Brasil",
+                    "link": "https://blog.betrybe.com/carreira/trybetalks-gaules/"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog/tecnoblog": {
+      "get": {
+        "summary": "Busca os links do Tecnoblog",
+        "description": "Essa rota será a responsável por buscas os links do Tecnoblog para o usuário logado no sistema.",
+        "tags": ["Blog"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                },
+                "example": [
+                  {
+                    "title": "Processadores com mais de 10 anos ainda funcionam bem? As discussões na Comunidade do TB",
+                    "link": "https://tecnoblog.net/noticias/2023/02/04/processadores-com-mais-de-10-anos-ainda-funcionam-bem-as-discussoes-na-comunidade-do-tb/"
+                  },
+                  {
+                    "title": "A internet ficou mais barata no Brasil? As discussões na Comunidade do TB",
+                    "link": "https://tecnoblog.net/noticias/2023/01/28/a-internet-ficou-mais-barata-no-brasil-as-discussoes-na-comunidade-do-tb/"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "LoginData": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterData": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LinkData": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
+      "Links": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

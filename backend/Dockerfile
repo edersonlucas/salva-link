@@ -17,4 +17,4 @@ RUN ["npm", "install"]
 
 RUN ["npm", "run", "build"]
 
-CMD ["npm", "run", "dev:docker"]
+CMD ["npm", "run", "start:docker"]

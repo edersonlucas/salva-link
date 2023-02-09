@@ -23,7 +23,7 @@ const validateRegister = (data: RegisterDTO): void => {
   returnError(error);
 };
 
-const validateLink = (data: Omit<LinkDTO, 'userId'>): void => {
+const validateLink = (data: LinkDTO): void => {
   const { error } = linkSchema.validate(data);
   returnError(error);
 };

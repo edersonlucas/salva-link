@@ -1,5 +1,4 @@
-import ILink from '../interfaces/ILink';
-
-export default interface LinkDTO extends ILink {
-  userId: number;
+export default interface LinkDTO {
+  title: string;
+  link: string;
 }

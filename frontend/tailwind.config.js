@@ -7,7 +7,7 @@ module.exports = {
         min: "480px",
       },
       fontFamily: {
-        sans: '"Roboto",sans-serif',
+        sans: '"roboto", sans-serif',
       },
       colors: {
         blue: {

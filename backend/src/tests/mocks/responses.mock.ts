@@ -1,11 +1,13 @@
 const incorrectEmailOrPassword = { message: 'Incorrect email or password' };
 const emailAlreadyRegistered = { message: 'This email is already registered.' };
 const tokenInvalid = { message: 'Token must be a valid token' };
+const tokenNotFound = { message: 'Token not found' };
 const linkAlreadyRegistered = { message: 'You already saved this link' };
 const failedUpdateLink = { message: 'Failed to update link' };
 const failedRemoveLink = { message: 'Failed to remove link' };
 const emailIsRequired = { message: '"email" is required' };
 const emailFormatInvalid = { message: '"email" must be a valid email' };
+const internalServerError = { message: 'Internal Server Error!' };
 
 export {
   incorrectEmailOrPassword,
@@ -16,4 +18,6 @@ export {
   failedRemoveLink,
   emailIsRequired,
   emailFormatInvalid,
+  internalServerError,
+  tokenNotFound,
 };

@@ -9,7 +9,11 @@ import app from '../app';
 
 import { findOneMock } from './mocks/user.mock';
 import tokenMock from './mocks/token.mock';
-import { incorrectEmailOrPassword } from './mocks/responses.mock';
+import {
+  emailFormatInvalid,
+  emailIsRequired,
+  incorrectEmailOrPassword,
+} from './mocks/responses.mock';
 
 chai.use(chaiHttp);
 
@@ -35,6 +39,33 @@ describe('POST /login', () => {
         });
       expect(httpResponse.status).to.equal(200);
       expect(httpResponse.body).to.deep.equal({ token: tokenMock });
+    });
+  });
+
+  describe('Unable to login successfully with no email or password field', () => {
+    it('Should return a 400 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .post('/login')
+        .send({
+          password: 'ronaldo',
+        });
+      expect(httpResponse.status).to.equal(400);
+      expect(httpResponse.body).to.deep.equal(emailIsRequired);
+    });
+  });
+
+  describe('Unable to login successfully with an email with invalid format', () => {
+    it('Should return a 422 status code', async () => {
+      const httpResponse: Response = await chai
+        .request(app)
+        .post('/login')
+        .send({
+          email: 'ederson.com',
+          password: 'ronaldo',
+        });
+      expect(httpResponse.status).to.equal(422);
+      expect(httpResponse.body).to.deep.equal(emailFormatInvalid);
     });
   });
 

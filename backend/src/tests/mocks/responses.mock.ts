@@ -4,6 +4,8 @@ const tokenInvalid = { message: 'Token must be a valid token' };
 const linkAlreadyRegistered = { message: 'You already saved this link' };
 const failedUpdateLink = { message: 'Failed to update link' };
 const failedRemoveLink = { message: 'Failed to remove link' };
+const emailIsRequired = { message: '"email" is required' };
+const emailFormatInvalid = { message: '"email" must be a valid email' };
 
 export {
   incorrectEmailOrPassword,
@@ -12,4 +14,6 @@ export {
   linkAlreadyRegistered,
   failedUpdateLink,
   failedRemoveLink,
+  emailIsRequired,
+  emailFormatInvalid,
 };

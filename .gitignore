@@ -8,5 +8,6 @@
 /frontend/dist
 /frontend/build
 /frontend/.env
+/frontend/.next
 
 .env

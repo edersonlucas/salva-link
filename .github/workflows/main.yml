@@ -16,4 +16,4 @@ jobs:
         run: npm install --prefix ./backend
 
       - name: Executando o lint para verificar se a erros.
-        run: npx eslint ./backend
+        run: npx eslint ./backend/src --ext .ts

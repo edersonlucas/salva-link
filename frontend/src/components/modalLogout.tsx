@@ -14,12 +14,15 @@ export default function ModalLogout(props: IModalLogoutProps) {
       <div className="relative p-8 bg-white w-full max-w-md m-auto flex flex-col rounded-lg items-center">
         <h3 className="text-lg lg:text-xl mb-4">Deseja mesmo sair?</h3>
         <div className="flex flex-col lg:flex-row gap-3 lg:gap-5 w-full text-base lg:text-lg">
-          <button onClick={logout} className="bg-red-700 w-full rounded-md">
+          <button
+            onClick={logout}
+            className="bg-red-700 w-full rounded-md hover:bg-red-800 transition-colors"
+          >
             Sim
           </button>
           <button
             onClick={() => setModalIsOpen(false)}
-            className="bg-orange-700 w-full rounded-md"
+            className="bg-orange-700 w-full rounded-md hover:bg-orange-800 transition-colors"
           >
             Não
           </button>

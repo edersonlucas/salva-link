@@ -14,9 +14,7 @@ import { RegisterMessage, LoginMessage } from "@/enums/returnMessages.enum";
 import loginDTO from "../dto/loginDTO";
 import registerDTO from "../dto/registerDTO";
 
-interface IProps {
-  children: ReactNode;
-}
+import IProviderProps from "../interfaces/IProviderProps";
 
 interface IAuthentication {
   isAuthenticated: boolean;
@@ -27,7 +25,7 @@ interface IAuthentication {
 
 export const AuthContext = createContext({} as IAuthentication);
 
-export function AuthProvider({ children }: IProps) {
+export function AuthProvider({ children }: IProviderProps) {
   const { push } = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 

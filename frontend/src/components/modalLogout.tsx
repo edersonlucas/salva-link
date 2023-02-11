@@ -18,13 +18,13 @@ export default function ModalLogout(props: IModalLogoutProps) {
             <div className="flex flex-col lg:flex-row gap-3 lg:gap-5 w-full text-base lg:text-lg">
               <button
                 onClick={logout}
-                className="bg-red-700 w-full rounded-md hover:bg-red-800 transition-colors text-sm lg:text-base p-2"
+                className="bg-red-700 w-full rounded-sm hover:bg-red-800 transition-colors text-sm lg:text-base p-2"
               >
                 SIM
               </button>
               <button
                 onClick={() => setModalIsOpen(false)}
-                className="bg-orange-700 w-full rounded-md hover:bg-orange-800 transition-colors text-sm lg:text-base p-2"
+                className="bg-orange-700 w-full rounded-sm hover:bg-orange-800 transition-colors text-sm lg:text-base p-2"
               >
                 NÃO
               </button>

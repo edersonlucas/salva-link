@@ -12,6 +12,7 @@ import { X } from "phosphor-react";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { parseCookies } from "nookies";
+import { UpdateMessage } from "@/enums/returnMessages.enum";
 
 interface IModalEditLinkProps {
   linkSelected: ILink | null;
@@ -41,7 +42,7 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
         { title, link },
         { headers: { Authorization: token } }
       )
-      .then((_response) => {
+      .then((response) => {
         const updatedLinks = links.map((item) => {
           if (item.id === linkSelected?.id) {
             item.title = title;
@@ -50,11 +51,13 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
           return item;
         });
         setLinks(updatedLinks);
-        toast.success("Link atualizado com sucesso!");
+        const { status } = response;
+        toast.success(UpdateMessage[status]);
         setModalEditIsOpen(false);
       })
-      .catch((_err) => {
-        toast.error("Falha ao atualizar link.");
+      .catch((err) => {
+        const status: number = err.response.status;
+        toast.error(UpdateMessage[status]);
       });
   };
 

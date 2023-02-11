@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className={roboto.className}>
           <ToastContainer
             position="bottom-center"
-            autoClose={3000}
+            autoClose={2000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick

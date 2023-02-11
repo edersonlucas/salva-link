@@ -43,7 +43,7 @@ export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
       >
         <div className="bg-zinc-900 p-8 w-full h-full max-w-md m-auto flex flex-col rounded-lg items-center justify-center">
           <div className="flex flex-col gap-3 text-sm text-zinc-700 w-full">
-            <h1 className="text-white-900 text-lg font-medium text-center">
+            <h1 className="text-white-900 text-base lg:text-lg font-medium text-center">
               VOCÊ TEM CERTEZA QUE DESEJA REMOVER ESTE LINK?
             </h1>
             <div className="text-white-900 flex flex-col lg:flex-row lg:gap-3">

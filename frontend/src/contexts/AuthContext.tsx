@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  ReactNode,
   useEffect,
   useState,
   useMemo,
@@ -53,10 +52,9 @@ export function AuthProvider({ children }: IProviderProps) {
           push("/");
         })
         .catch((err) => {
-          const {
-            response: { status },
-          } = err;
-          toast.error(LoginMessage[status]);
+          const status: number = err?.response?.status;
+          if (status) return toast.error(LoginMessage[status]);
+          toast.error("Erro interno no servidor.");
         });
     },
     [oneDay, push]
@@ -79,10 +77,10 @@ export function AuthProvider({ children }: IProviderProps) {
           push("/");
         })
         .catch((err) => {
-          const {
-            response: { status },
-          } = err;
-          toast.error(RegisterMessage[status]);
+          const status: number = err?.response?.status;
+          if (RegisterMessage[status])
+            return toast.error(RegisterMessage[status]);
+          toast.error("Erro interno no servidor.");
         });
     },
     [oneDay, push]

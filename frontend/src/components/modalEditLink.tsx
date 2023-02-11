@@ -64,7 +64,7 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
   return (
     <div className="fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
       <form
-        className="fixed inset-0 z-50 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-72 flex m-auto rounded-md"
+        className="fixed inset-0 z-50 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-72 flex m-auto"
         onSubmit={handleSubmit}
       >
         <button

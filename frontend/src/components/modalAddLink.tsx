@@ -10,6 +10,7 @@ import { X } from "phosphor-react";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { parseCookies } from "nookies";
+import { AddMessage } from "@/enums/returnMessages.enum";
 
 interface IModalEditLinkProps {
   setModalAddIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -30,11 +31,13 @@ export default function ModalAddLink(props: IModalEditLinkProps) {
       .then((response) => {
         const updatedLinks = [...links, response.data];
         setLinks(updatedLinks);
-        toast.success("Link adicionado com sucesso!");
+        const { status } = response;
+        toast.success(AddMessage[status]);
         setModalAddIsOpen(false);
       })
-      .catch((_err) => {
-        toast.error("Falha ao adicionar novo link.");
+      .catch((err) => {
+        const status: number = err.response.status;
+        toast.error(AddMessage[status]);
       });
   };
 

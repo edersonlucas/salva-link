@@ -15,3 +15,9 @@ export enum UpdateMessage {
   "Faça alguma modificação para salvar." = 400,
   "Link e/ou título inválido." = 422,
 }
+
+export enum AddMessage {
+  "Link adicionado com sucesso!" = 201,
+  "Você já tem este link salvo." = 409,
+  "Link e/ou título inválido." = 422,
+}

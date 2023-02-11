@@ -9,3 +9,9 @@ export enum RegisterMessage {
   "Email já cadastrado." = 409,
   "Preencha todos os campos corretamente." = 422,
 }
+
+export enum UpdateMessage {
+  "Link atualizado com sucesso!" = 204,
+  "Faça alguma modificação para salvar." = 400,
+  "Link e/ou título inválido." = 422,
+}

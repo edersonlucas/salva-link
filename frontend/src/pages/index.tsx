@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { GlobalContext } from "../contexts/GlobalContext";
 import Header from "../components/header";
 import LinkCard from "../components/linkCard";
-import { PlusCircle } from "phosphor-react";
+import { PlusCircle, XCircle } from "phosphor-react";
 import ModalAddLink from "../components/modalAddLink";
 import IllustrationNotFoundLink from "../assets/img/illustation-home-not-found-links.svg";
 import Image from "next/image";
@@ -30,7 +30,8 @@ export default function Home() {
       .get("/link", { headers: { Authorization: token } })
       .then((response) => setLinks(response.data))
       .catch((err) => {
-        if (err.response.status === 401) {
+        const status: number = err?.response?.status;
+        if (status === 401) {
           logout();
         }
       });
@@ -46,13 +47,23 @@ export default function Home() {
           <Header />
           <div className="p-3 lg:p-7 w-full max-w-[1300px] h-full grow mx-auto">
             <div className="flex flex-col items-center mb-6 gap-3 lg:flex-row">
-              <input
-                className="bg-zinc-600 px-5 h-11 w-full placeholder-gray-700"
-                type="text"
-                placeholder="Buscar..."
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-              />
+              <div className="w-full relative">
+                <input
+                  className="bg-zinc-600 px-5 h-11 w-full placeholder-gray-700"
+                  type="text"
+                  placeholder="Buscar..."
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+                {search && (
+                  <button
+                    className="absolute top-2 right-2 text-zinc-700 hover:text-zinc-800 transition-colors"
+                    onClick={() => setSearch("")}
+                  >
+                    <XCircle size={31} />
+                  </button>
+                )}
+              </div>
               <button
                 type="button"
                 className="flex items-center justify-center bg-green-700 text-sm lg:text-base p-1 lg:p-2 w-full lg:w-1/4 rounded-sm hover:bg-green-800 transition-colors text-white-900"

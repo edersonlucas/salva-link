@@ -5,14 +5,10 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { GlobalContext } from "@/contexts/GlobalContext";
-import ILink from "../interfaces/ILink";
-import { X } from "phosphor-react";
-import api from "../services/api";
-import { toast } from "react-toastify";
-import { parseCookies } from "nookies";
-import { UpdateMessage } from "@/enums/returnMessages.enum";
+} from 'react';
+import { X } from 'phosphor-react';
+import { GlobalContext } from '../contexts/GlobalContext';
+import ILink from '../interfaces/ILink';
 
 interface IModalEditLinkProps {
   linkSelected: ILink | null;
@@ -20,9 +16,9 @@ interface IModalEditLinkProps {
 }
 
 export default function ModalEditLink(props: IModalEditLinkProps) {
-  const { links, setLinks } = useContext(GlobalContext);
-  const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
+  const { editLink } = useContext(GlobalContext);
+  const [title, setTitle] = useState('');
+  const [link, setLink] = useState('');
 
   const { setModalEditIsOpen, linkSelected } = props;
 
@@ -33,32 +29,14 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
     }
   }, [linkSelected]);
 
-  const handleSubmit = (event: FormEvent) => {
-    const { "salvalink.token": token } = parseCookies();
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    api
-      .put(
-        `/link/${linkSelected?.id}`,
-        { title, link },
-        { headers: { Authorization: token } }
-      )
-      .then((response) => {
-        const updatedLinks = links.map((item) => {
-          if (item.id === linkSelected?.id) {
-            item.title = title;
-            item.link = link;
-          }
-          return item;
-        });
-        setLinks(updatedLinks);
-        const { status } = response;
-        toast.success(UpdateMessage[status]);
-        setModalEditIsOpen(false);
-      })
-      .catch((err) => {
-        const status: number = err.response.status;
-        toast.error(UpdateMessage[status]);
-      });
+    try {
+      await editLink({ id: Number(linkSelected?.id), title, link });
+      setModalEditIsOpen(false);
+    } catch (e) {
+      /* empty */
+    }
   };
 
   return (
@@ -68,6 +46,7 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
         onSubmit={handleSubmit}
       >
         <button
+          type="button"
           className="bg-red-700 z-10 p-2 rounded-full absolute right-3 top-0 hover:bg-red-800 transition-colors"
           onClick={() => setModalEditIsOpen(false)}
         >

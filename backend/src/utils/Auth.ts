@@ -1,5 +1,5 @@
 import { sign, verify } from 'jsonwebtoken';
-import UserPayloadDTO from '../dto/UserPayloadDTO';
+import UserJWTPayloadDTO from '../dto/UserJWTPayloadDTO';
 import 'dotenv/config';
 import ErrorGenerator from './ErrorGenerator';
 
@@ -10,7 +10,7 @@ export default class Auth {
     this.secretJwt = process.env.JWT_SECRET;
   }
 
-  public authentication(payload: UserPayloadDTO): string {
+  public authentication(payload: UserJWTPayloadDTO): string {
     const token = sign(payload, this.secretJwt, { expiresIn: '1d' });
     return token;
   }

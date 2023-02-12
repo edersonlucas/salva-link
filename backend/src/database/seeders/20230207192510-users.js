@@ -8,7 +8,7 @@ module.exports = {
           username: 'teste',
           email: 'teste@teste.com',
           password:
-            '$2y$10$Z2kC9BU1BpAypNl3B4bLa.oKHvTPiHa5jZAun6EI4eXIb0O6WK4U2',
+            '$2y$10$goU.lSH8uA8CbRs.Ikiej.MOyUGtOE7aK6NXrcqiDpGiCAoLuVUcC',
           createdAt: '2023-02-11 21:22:21',
           updatedAt: '2023-02-11 21:22:21',
         },

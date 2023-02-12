@@ -4,41 +4,29 @@ import {
   SetStateAction,
   useContext,
   useState,
-} from "react";
-import { GlobalContext } from "@/contexts/GlobalContext";
-import { X } from "phosphor-react";
-import api from "../services/api";
-import { toast } from "react-toastify";
-import { parseCookies } from "nookies";
-import { AddMessage } from "@/enums/returnMessages.enum";
+} from 'react';
+import { X } from 'phosphor-react';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 interface IModalEditLinkProps {
   setModalAddIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function ModalAddLink(props: IModalEditLinkProps) {
-  const { links, setLinks } = useContext(GlobalContext);
-  const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
+  const { addNewLink } = useContext(GlobalContext);
+  const [title, setTitle] = useState('');
+  const [link, setLink] = useState('');
 
   const { setModalAddIsOpen } = props;
 
-  const handleSubmit = (event: FormEvent) => {
-    const { "salvalink.token": token } = parseCookies();
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    api
-      .post("/link/", { title, link }, { headers: { Authorization: token } })
-      .then((response) => {
-        const updatedLinks = [...links, response.data];
-        setLinks(updatedLinks);
-        const { status } = response;
-        toast.success(AddMessage[status]);
-        setModalAddIsOpen(false);
-      })
-      .catch((err) => {
-        const status: number = err.response.status;
-        toast.error(AddMessage[status]);
-      });
+    try {
+      await addNewLink({ title, link });
+      setModalAddIsOpen(false);
+    } catch (_err) {
+      /* empty */
+    }
   };
 
   return (
@@ -48,6 +36,7 @@ export default function ModalAddLink(props: IModalEditLinkProps) {
         onSubmit={handleSubmit}
       >
         <button
+          type="button"
           className="bg-red-700 z-10 p-2 rounded-full absolute right-3 top-0 hover:bg-red-800 transition-colors"
           onClick={() => setModalAddIsOpen(false)}
         >

@@ -35,7 +35,7 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
       await editLink({ id: Number(linkSelected?.id), title, link });
       setModalEditIsOpen(false);
     } catch (e) {
-      /* empty */
+      setModalEditIsOpen(true);
     }
   };
 

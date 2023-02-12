@@ -25,7 +25,7 @@ export default function ModalAddLink(props: IModalEditLinkProps) {
       await addNewLink({ title, link });
       setModalAddIsOpen(false);
     } catch (_err) {
-      /* empty */
+      setModalAddIsOpen(true);
     }
   };
 

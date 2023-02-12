@@ -25,3 +25,10 @@ export enum AddMessage {
   'Link e/ou título inválido.' = 422,
   'Erro interno no servidor.' = 500,
 }
+
+export enum PasswordUpdate {
+  'Senha atualizada com sucesso!' = 204,
+  'A nova senha deve ser diferente da anterior.' = 409,
+  'Senha inválida.' = 422,
+  'Erro interno no servidor.' = 500,
+}

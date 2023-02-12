@@ -12,7 +12,7 @@ export default function BlogCard(props: IBlogCardProps) {
   const [modalLinksIsOpen, setModalLinksIsOpen] = useState(false);
   return (
     <div className="flex flex-col items-center bg-white-900 min-w-xs h-[220px] p-4 lg:p-8 grow m-3">
-      <h1 className="p-8 text-3xl text-blue-700 font-bold">
+      <h1 className="p-8 text-3xl text-blue-700 font-bold text-center">
         Blog: {data.name}
       </h1>
       <button

@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { FormEvent, useState, useContext, useEffect } from 'react';
 import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
-import { Eye, EyeSlash, Envelope, Lock, User } from 'phosphor-react';
+import { Envelope, User } from 'phosphor-react';
+import InputPassword from '../components/inputPassword';
 import { AuthContext } from '../contexts/AuthContext';
 import Logo from '../assets/img/logo.svg';
 import IllustrationRegister from '../assets/img/illustration-register.svg';
@@ -13,7 +14,6 @@ export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const { register } = useContext(AuthContext);
 
   const { push } = useRouter();
@@ -89,31 +89,7 @@ export default function Register() {
                   id="registerEmail"
                 />
               </label>
-              <label className="relative" htmlFor="registerPassword">
-                <Lock
-                  className="text-zinc-800 absolute left-3 bottom-[.9rem]"
-                  size={25}
-                />
-                <button
-                  onClick={() => setIsVisiblePassword(!isVisiblePassword)}
-                  type="button"
-                  className="text-zinc-800 absolute right-3 bottom-[.9rem]"
-                >
-                  {isVisiblePassword ? (
-                    <Eye size={26} />
-                  ) : (
-                    <EyeSlash size={26} />
-                  )}
-                </button>
-                <input
-                  className="bg-zinc-600 rounded px-5 h-14 w-full pl-11 placeholder-gray-700"
-                  type={isVisiblePassword ? 'text' : 'password'}
-                  placeholder="Senha"
-                  value={password}
-                  id="registerPassword"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </label>
+              <InputPassword password={password} setPassword={setPassword} />
 
               <span className="text-black-900 text-center">
                 Já tem conta?{' '}

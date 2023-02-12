@@ -6,12 +6,12 @@ export default class DevGoBlogScraping {
   static async get() {
     const { page, browser } = await Browser('https://devgo.com.br/');
     try {
-      await page.waitForSelector('.blog-featured-container', { timeout: 2000 });
+      await page.waitForSelector('.blog-featured-container', { timeout: 4000 });
       await page.click('.css-1vyhe0m > button');
       await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
       });
-      await page.waitForSelector('.blog-posts-end-card', { timeout: 2000 });
+      await page.waitForSelector('.blog-posts-end-card', { timeout: 4000 });
       const links: ILink[] = await page.evaluate(() => {
         const cards = Array.from(
           document.querySelectorAll('.blog-article-card'),

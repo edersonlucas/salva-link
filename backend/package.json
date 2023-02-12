@@ -1,15 +1,15 @@
 {
   "name": "salvalink-backend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Application backend SalvaLink",
   "main": "src/server.ts",
   "scripts": {
     "build": "npx tsc",
     "start": "node ./build/server.js",
     "dev": "ts-node-dev ./src/server.ts",
-    "start:docker": "npm run db:reset && npm start",
     "lint": "eslint ./src --ext .ts",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:create": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "test": "mocha -r ts-node/register ./src/tests/*.{test,spec}.ts -t 10000 --exit",
     "test:coverage": "nyc npm run test"
   },

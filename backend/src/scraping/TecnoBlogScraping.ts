@@ -8,7 +8,7 @@ export default class TecnoBlogScraping {
       'https://tecnoblog.net/tema/tecnoblog/',
     );
     try {
-      await page.waitForSelector('.tb-hub-module-title', { timeout: 2000 });
+      await page.waitForSelector('.tb-hub-module-title', { timeout: 4000 });
       const links: ILink[] = await page.evaluate(() => {
         const cards = Array.from(
           document.querySelectorAll('.article-destaque'),

@@ -11,7 +11,7 @@ import {
 } from 'react';
 import Image from 'next/image';
 import api from '../services/api';
-import LinkBlogCard from './linkBlogCard';
+import BlogLinkCard from './blogLinkCard';
 import { AuthContext } from '../contexts/AuthContext';
 import ILink from '../interfaces/ILink';
 import SearchAnimatedIcon from './searchAnimatedIcon';
@@ -69,8 +69,8 @@ export default function ModalLinks(props: ModalLinksProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
-      <div className="fixed inset-0 z-50 overflow-auto text-white-900 p-2 w-full lg:w-[75vw] h-[85vh] flex m-auto">
+    <div className="z-50  fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
+      <div className="fixed inset-0 overflow-auto text-white-900 p-2 w-full lg:w-[75vw] h-[85vh] flex m-auto">
         <button
           type="button"
           className="bg-red-700 z-10 p-2 rounded-full absolute right-0 top-1 hover:bg-red-800 transition-colors"
@@ -109,7 +109,7 @@ export default function ModalLinks(props: ModalLinksProps) {
           )}
           <div className="w-full overflow-y-scroll scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-600">
             {blogLinks.map((item) => (
-              <LinkBlogCard key={item.link} data={item} />
+              <BlogLinkCard key={item.link} data={item} />
             ))}
           </div>
         </div>

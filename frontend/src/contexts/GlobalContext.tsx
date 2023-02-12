@@ -24,7 +24,7 @@ interface IGlobalContext {
   setUser: Dispatch<SetStateAction<IUser | null>>;
   links: ILink[];
   setLinks: Dispatch<SetStateAction<ILink[]>>;
-  addNewLink: (data: addLinkDTO) => Promise<void>;
+  addNewLink: (data: addLinkDTO, type?: string) => Promise<void>;
   editLink: (data: editLinkDTO) => Promise<void>;
   removeLink: (id: number) => Promise<void>;
   getLinksUser: () => Promise<void>;
@@ -39,20 +39,26 @@ export function GlobalProvider({ children }: IProviderProps) {
   const { push } = useRouter();
 
   const addNewLink = useCallback(
-    async ({ title, link }: addLinkDTO) => {
+    async ({ title, link }: addLinkDTO, type = 'add') => {
       const { 'salvalink.token': token } = parseCookies();
       await api
         .post('/link/', { title, link }, { headers: { Authorization: token } })
         .then((response) => {
           const updatedLinks = [...links, response.data];
           setLinks(updatedLinks);
-          const { status } = response;
-          toast.success(AddMessage[status]);
+          if (type !== 'save') {
+            const { status } = response;
+            toast.success(AddMessage[status]);
+          }
+          toast.success('Link salvo com sucesso!');
         })
         .catch((err) => {
           const { status } = err.response;
-          toast.error(AddMessage[status]);
-          throw new Error(AddMessage[status]);
+          if (type !== 'save') {
+            toast.error(AddMessage[status]);
+            throw new Error(AddMessage[status]);
+          }
+          toast.error('Ocorreu um erro ao salvar o link');
         });
     },
     [links],

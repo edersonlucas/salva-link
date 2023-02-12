@@ -35,14 +35,14 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
       await editLink({ id: Number(linkSelected?.id), title, link });
       setModalEditIsOpen(false);
     } catch (e) {
-      /* empty */
+      setModalEditIsOpen(true);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
+    <div className="z-50 fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
       <form
-        className="fixed inset-0 z-50 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-72 flex m-auto"
+        className="fixed inset-0 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-72 flex m-auto"
         onSubmit={handleSubmit}
       >
         <button

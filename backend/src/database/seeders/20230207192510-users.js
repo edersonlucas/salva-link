@@ -5,12 +5,12 @@ module.exports = {
       [
         {
           id: 1,
-          username: 'edersonlucas',
-          email: 'edersonlucas@outlook.com',
+          username: 'teste',
+          email: 'teste@teste.com',
           password:
-            '$2y$10$z7ToCdZ2KDmrqxf4auUPa.jCx2euQkfrld57l/6SU4vCS4GTSCO4C',
-          createdAt: '2020-10-29 21:22:21',
-          updatedAt: '2020-10-29 21:22:22',
+            '$2y$10$goU.lSH8uA8CbRs.Ikiej.MOyUGtOE7aK6NXrcqiDpGiCAoLuVUcC',
+          createdAt: '2023-02-11 21:22:21',
+          updatedAt: '2023-02-11 21:22:21',
         },
       ],
       {},

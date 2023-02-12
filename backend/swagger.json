@@ -453,11 +453,87 @@
         }
       }
     },
-    "/blog/devgo": {
+    "/blog/": {
       "get": {
-        "summary": "Busca os links do blog devGo",
-        "description": "Essa rota será a responsável por buscas os links do blog devGo para o usuário logado no sistema.",
+        "summary": "Busca todos os blogs",
+        "description": "Essa rota será a responsável por todos os blogs disponíveis para o usuário logado no sistema.",
         "tags": ["Blog"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Blogs"
+                },
+                "example": [
+                  {
+                    "name": "Trybe"
+                  },
+                  {
+                    "name": "DevGO"
+                  },
+                  {
+                    "name": "TecnoBlog"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Token must be a valid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog/{name}": {
+      "get": {
+        "summary": "Busca os links do blog pelo nome",
+        "description": "Essa rota será a responsável por buscas os links do blog passado como parâmetro para o usuário logado no sistema.",
+        "tags": ["Blog"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "require": true,
+            "description": "O nome do blog"
+          }
+        ],
         "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": {
@@ -498,8 +574,8 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -511,121 +587,7 @@
                   }
                 },
                 "example": {
-                  "message": "Internal Server Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/blog/trybe": {
-      "get": {
-        "summary": "Busca os links do blog da Trybe",
-        "description": "Essa rota será a responsável por buscas os links do blog da Trybe para o usuário logado no sistema.",
-        "tags": ["Blog"],
-        "security": [{ "bearerAuth": [] }],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Links"
-                },
-                "example": [
-                  {
-                    "title": "5 exemplos de algoritmos na vida real e na computação",
-                    "link": "https://blog.betrybe.com/tecnologia/exemplos-de-algoritmos/"
-                  },
-                  {
-                    "title": "TrybeTalks — Gaules: os ensinamentos de um dos maiores streamers do Brasil",
-                    "link": "https://blog.betrybe.com/carreira/trybetalks-gaules/"
-                  }
-                ]
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Token must be a valid token"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Internal Server Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/blog/tecnoblog": {
-      "get": {
-        "summary": "Busca os links do Tecnoblog",
-        "description": "Essa rota será a responsável por buscas os links do Tecnoblog para o usuário logado no sistema.",
-        "tags": ["Blog"],
-        "security": [{ "bearerAuth": [] }],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Links"
-                },
-                "example": [
-                  {
-                    "title": "Processadores com mais de 10 anos ainda funcionam bem? As discussões na Comunidade do TB",
-                    "link": "https://tecnoblog.net/noticias/2023/02/04/processadores-com-mais-de-10-anos-ainda-funcionam-bem-as-discussoes-na-comunidade-do-tb/"
-                  },
-                  {
-                    "title": "A internet ficou mais barata no Brasil? As discussões na Comunidade do TB",
-                    "link": "https://tecnoblog.net/noticias/2023/01/28/a-internet-ficou-mais-barata-no-brasil-as-discussoes-na-comunidade-do-tb/"
-                  }
-                ]
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Token must be a valid token"
+                  "message": "Blog not found"
                 }
               }
             }
@@ -709,6 +671,17 @@
               "type": "string"
             },
             "link": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Blogs": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
               "type": "string"
             }
           }

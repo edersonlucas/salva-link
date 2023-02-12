@@ -1,31 +1,37 @@
-import { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import { List, X, User } from "phosphor-react";
-import Link from "next/link";
-import Image from "next/image";
-import LogoWhite from "../assets/img/logo-white.svg";
-import { GlobalContext } from "../contexts/GlobalContext";
-import jwt_decode from "jwt-decode";
-import { parseCookies } from "nookies";
-import IPayloadJWT from "../interfaces/IPayloadJWT";
-import ModalLogout from "./modalLogout";
+import { useState, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { List, X, User } from 'phosphor-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import jwtDecode from 'jwt-decode';
+import { parseCookies } from 'nookies';
+import { AuthContext } from '../contexts/AuthContext';
+import { GlobalContext } from '../contexts/GlobalContext';
+import LogoWhite from '../assets/img/logo-white.svg';
+import IPayloadJWT from '../interfaces/IPayloadJWT';
+import ModalLogout from './modalLogout';
 
 export default function Header() {
   const { user, setUser } = useContext(GlobalContext);
+  const { logout } = useContext(AuthContext);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const { pathname } = useRouter();
 
   useEffect(() => {
-    const { "salvalink.token": token } = parseCookies();
-    const payload: IPayloadJWT = jwt_decode(token);
-    setUser({
-      id: payload.sub,
-      username: payload.username,
-      email: payload.email,
-    });
-  }, [setUser]);
+    const { 'salvalink.token': token } = parseCookies();
+    try {
+      const payload: IPayloadJWT = jwtDecode(token);
+      setUser({
+        id: payload.sub,
+        username: payload.username,
+        email: payload.email,
+      });
+    } catch (_err) {
+      logout();
+    }
+  }, [setUser, logout]);
 
   const handleLogout = () => {
     setIsOpenMenu(false);
@@ -34,9 +40,9 @@ export default function Header() {
 
   const openMenu = () => {
     if (isOpenMenu) {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     } else {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     }
     setIsOpenMenu(!isOpenMenu);
   };
@@ -64,7 +70,7 @@ export default function Header() {
           <Link
             href="/"
             className={`hover:opacity-90 ${
-              pathname === "/" && "bg-blue-600 px-3 rounded-md"
+              pathname === '/' && 'bg-blue-600 px-3 rounded-md'
             } `}
           >
             Início
@@ -72,7 +78,7 @@ export default function Header() {
           <Link
             href="/suggestions"
             className={`hover:opacity-90 ${
-              pathname === "/suggestions" && "bg-blue-600 px-3 rounded-md"
+              pathname === '/suggestions' && 'bg-blue-600 px-3 rounded-md'
             } `}
           >
             Sugestões
@@ -87,7 +93,7 @@ export default function Header() {
         </nav>
         <div
           className={`fixed left-0 bottom-[-71px] h-full w-full z-30 bg-blue-600 bg-opacity-[99%] transform-gpu transition-all lg:hidden ${
-            isOpenMenu ? "-translate-y-0" : "translate-y-full"
+            isOpenMenu ? '-translate-y-0' : 'translate-y-full'
           }`}
         >
           <nav className="h-full flex flex-col items-center justify-center gap-8 text-white-900 text-2xl">
@@ -95,7 +101,7 @@ export default function Header() {
               onClick={() => setIsOpenMenu(!isOpenMenu)}
               href="/"
               className={`hover:opacity-90 ${
-                pathname === "/" && "bg-blue-700 px-20 rounded-md"
+                pathname === '/' && 'bg-blue-700 px-20 rounded-md'
               } `}
             >
               Início
@@ -104,7 +110,7 @@ export default function Header() {
               onClick={() => setIsOpenMenu(!isOpenMenu)}
               href="/suggestions"
               className={`hover:opacity-90 ${
-                pathname === "/suggestions" && "bg-blue-700 px-20 rounded-md"
+                pathname === '/suggestions' && 'bg-blue-700 px-20 rounded-md'
               } `}
             >
               Sugestões

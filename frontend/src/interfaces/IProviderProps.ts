@@ -1,5 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-export default interface IProviderProps {
+interface IProviderProps {
   children: ReactNode;
 }
+
+export default IProviderProps;

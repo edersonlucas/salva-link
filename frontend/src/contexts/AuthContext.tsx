@@ -4,16 +4,16 @@ import React, {
   useState,
   useMemo,
   useCallback,
-} from "react";
-import { setCookie, parseCookies, destroyCookie } from "nookies";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
-import api from "../services/api";
-import { RegisterMessage, LoginMessage } from "@/enums/returnMessages.enum";
-import loginDTO from "../dto/loginDTO";
-import registerDTO from "../dto/registerDTO";
+} from 'react';
+import { setCookie, parseCookies, destroyCookie } from 'nookies';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { RegisterMessage, LoginMessage } from '../enums/returnMessages.enum';
+import api from '../services/api';
+import loginDTO from '../dto/loginDTO';
+import registerDTO from '../dto/registerDTO';
 
-import IProviderProps from "../interfaces/IProviderProps";
+import IProviderProps from '../interfaces/IProviderProps';
 
 interface IAuthentication {
   isAuthenticated: boolean;
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: IProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const { "salvalink.token": token } = parseCookies();
+    const { 'salvalink.token': token } = parseCookies();
     setIsAuthenticated(!!token);
   }, []);
 
@@ -38,9 +38,9 @@ export function AuthProvider({ children }: IProviderProps) {
   const login = useCallback(
     async ({ email, password }: loginDTO) => {
       await api
-        .post("/login", { email, password })
+        .post('/login', { email, password })
         .then((response) => {
-          setCookie(undefined, "salvalink.token", response.data.token, {
+          setCookie(undefined, 'salvalink.token', response.data.token, {
             maxAge: oneDay,
           });
           const {
@@ -49,23 +49,23 @@ export function AuthProvider({ children }: IProviderProps) {
           } = response;
           setIsAuthenticated(!!token);
           toast.success(LoginMessage[status]);
-          push("/");
+          push('/');
         })
         .catch((err) => {
           const status: number = err?.response?.status;
           if (status) return toast.error(LoginMessage[status]);
-          toast.error("Erro interno no servidor.");
+          toast.error('Erro interno no servidor.');
         });
     },
-    [oneDay, push]
+    [oneDay, push],
   );
 
   const register = useCallback(
     async ({ username, email, password }: registerDTO) => {
       await api
-        .post("/register", { username, email, password })
+        .post('/register', { username, email, password })
         .then((response) => {
-          setCookie(undefined, "salvalink.token", response.data.token, {
+          setCookie(undefined, 'salvalink.token', response.data.token, {
             maxAge: oneDay,
           });
           const {
@@ -74,22 +74,23 @@ export function AuthProvider({ children }: IProviderProps) {
           } = response;
           setIsAuthenticated(!!token);
           toast.success(RegisterMessage[status]);
-          push("/");
+          push('/');
         })
         .catch((err) => {
           const status: number = err?.response?.status;
-          if (RegisterMessage[status])
+          if (RegisterMessage[status]) {
             return toast.error(RegisterMessage[status]);
-          toast.error("Erro interno no servidor.");
+          }
+          toast.error('Erro interno no servidor.');
         });
     },
-    [oneDay, push]
+    [oneDay, push],
   );
 
   const logout = useCallback(() => {
-    destroyCookie(undefined, "salvalink.token");
+    destroyCookie(undefined, 'salvalink.token');
     setIsAuthenticated(false);
-    push("/login");
+    push('/login');
   }, [push]);
 
   const value = useMemo(
@@ -99,7 +100,7 @@ export function AuthProvider({ children }: IProviderProps) {
       register,
       logout,
     }),
-    [isAuthenticated, login, register, logout]
+    [isAuthenticated, login, register, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

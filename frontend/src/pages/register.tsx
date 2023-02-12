@@ -1,27 +1,27 @@
-import Image from "next/image";
-import Head from "next/head";
-import Link from "next/link";
-import { FormEvent, useState, useContext, useEffect } from "react";
-import { parseCookies } from "nookies";
-import { useRouter } from "next/router";
-import { AuthContext } from "../contexts/AuthContext";
-import Logo from "../assets/img/logo.svg";
-import IllustrationRegister from "../assets/img/illustration-register.svg";
-import { Eye, EyeSlash, Envelope, Lock, User } from "phosphor-react";
+import Image from 'next/image';
+import Head from 'next/head';
+import Link from 'next/link';
+import { FormEvent, useState, useContext, useEffect } from 'react';
+import { parseCookies } from 'nookies';
+import { useRouter } from 'next/router';
+import { Eye, EyeSlash, Envelope, Lock, User } from 'phosphor-react';
+import { AuthContext } from '../contexts/AuthContext';
+import Logo from '../assets/img/logo.svg';
+import IllustrationRegister from '../assets/img/illustration-register.svg';
 
 export default function Register() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const { register } = useContext(AuthContext);
 
   const { push } = useRouter();
 
   useEffect(() => {
-    const { "salvalink.token": token } = parseCookies();
+    const { 'salvalink.token': token } = parseCookies();
     if (token) {
-      push("/");
+      push('/');
     }
   }, [push]);
 
@@ -107,7 +107,7 @@ export default function Register() {
                 </button>
                 <input
                   className="bg-zinc-600 rounded px-5 h-14 w-full pl-11 placeholder-gray-700"
-                  type={isVisiblePassword ? "text" : "password"}
+                  type={isVisiblePassword ? 'text' : 'password'}
                   placeholder="Senha"
                   value={password}
                   id="registerPassword"
@@ -116,7 +116,7 @@ export default function Register() {
               </label>
 
               <span className="text-black-900 text-center">
-                Já tem conta?{" "}
+                Já tem conta?{' '}
                 <Link className="font-semibold" href="/login">
                   Entrar
                 </Link>

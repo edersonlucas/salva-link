@@ -1,5 +1,7 @@
-import loginDTO from "./loginDTO";
+import loginDTO from './loginDTO';
 
-export default interface registerDTO extends loginDTO {
+interface registerDTO extends loginDTO {
   username: string;
 }
+
+export default registerDTO;

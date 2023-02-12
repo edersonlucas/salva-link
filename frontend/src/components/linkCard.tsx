@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Check, Copy, PencilSimpleLine, Trash } from "phosphor-react";
-import ILink from "../interfaces/ILink";
-import Link from "next/link";
-import goLink from "../assets/img/go-link.svg";
-import ModalEditLink from "./modalEditLink";
-import ModalRemoveLink from "./modalRemoveLink";
-import { useState } from "react";
-import characterLimit from "../util/characterLimit";
+import Image from 'next/image';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Check, Copy, PencilSimpleLine, Trash } from 'phosphor-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import ILink from '../interfaces/ILink';
+import goLink from '../assets/img/go-link.svg';
+import ModalEditLink from './modalEditLink';
+import ModalRemoveLink from './modalRemoveLink';
+import characterLimit from '../util/characterLimit';
 
 interface ILinkCardProps {
   data: ILink;
@@ -28,9 +28,10 @@ export default function LinkCard(props: ILinkCardProps) {
   };
 
   return (
-    <div className="bg-zinc-900 text-white-900 flex flex-col lg:flex-row items-center justify-between p-3 rounded-md">
+    <div className="bg-zinc-900 text-white-900 flex flex-col lg:flex-row items-center justify-between p-3 rounded-md m-3">
       <CopyToClipboard text={data.link} onCopy={handleCopyKey}>
         <button
+          type="button"
           className="bg-blue-700 lg:h-20 w-full lg:w-40 text-sm lg:text-base p-1 lg:p-2 rounded-sm flex items-center justify-center mb-3 lg:mb-0 hover:bg-blue-800 transition-colors"
           disabled={linkIsCopied}
         >
@@ -49,7 +50,12 @@ export default function LinkCard(props: ILinkCardProps) {
       </CopyToClipboard>
       <div className="flex lg:flex-row items-center gap-4">
         <Link target="_blank" href={data.link} className="flex gap-2">
-          <Image src={goLink} alt="Icon to GoLink" width={32} />
+          <Image
+            className="hidden lg:block"
+            src={goLink}
+            alt="Icon to GoLink"
+            width={30}
+          />
           <div className="text-center">
             <p className="text-sm lg:text-base">
               {characterLimit(data.title, 45)}
@@ -62,6 +68,7 @@ export default function LinkCard(props: ILinkCardProps) {
       </div>
       <div className="flex lg:flex-col gap-3 mt-3 lg:mt-0 w-full lg:w-32">
         <button
+          type="button"
           className="bg-orange-700 w-full lg:w-32 flex justify-center items-center text-sm lg:text-base p-1 rounded-sm hover:bg-orange-800 transition-colors"
           onClick={() => setModalEditIsOpen(true)}
         >
@@ -69,6 +76,7 @@ export default function LinkCard(props: ILinkCardProps) {
           <PencilSimpleLine size={26} />
         </button>
         <button
+          type="button"
           className="bg-red-700 w-full lg:w-32 flex justify-center items-center text-sm lg:text-base p-1 rounded-sm hover:bg-red-800 transition-colors"
           onClick={() => setModalRemoveIsOpen(true)}
         >

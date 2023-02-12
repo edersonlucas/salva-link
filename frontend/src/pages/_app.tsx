@@ -1,9 +1,9 @@
-import "../styles/globals.css";
-import "react-toastify/dist/ReactToastify.min.css";
-import type { AppProps } from "next/app";
-import { ToastContainer } from "react-toastify";
-import { AuthProvider } from "../contexts/AuthContext";
-import { GlobalProvider } from "../contexts/GlobalContext";
+import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.min.css';
+import type { AppProps } from 'next/app';
+import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from '../contexts/AuthContext';
+import { GlobalProvider } from '../contexts/GlobalContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

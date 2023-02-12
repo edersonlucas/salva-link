@@ -1,26 +1,26 @@
-import Image from "next/image";
-import Head from "next/head";
-import Link from "next/link";
-import { FormEvent, useState, useContext, useEffect } from "react";
-import { parseCookies } from "nookies";
-import { useRouter } from "next/router";
-import { AuthContext } from "../contexts/AuthContext";
-import Logo from "../assets/img/logo.svg";
-import IllustrationLogin from "../assets/img/illustration-login.svg";
-import { Eye, EyeSlash, Envelope, Lock } from "phosphor-react";
+import Image from 'next/image';
+import Head from 'next/head';
+import Link from 'next/link';
+import { FormEvent, useState, useContext, useEffect } from 'react';
+import { parseCookies } from 'nookies';
+import { useRouter } from 'next/router';
+import { Eye, EyeSlash, Envelope, Lock } from 'phosphor-react';
+import { AuthContext } from '../contexts/AuthContext';
+import Logo from '../assets/img/logo.svg';
+import IllustrationLogin from '../assets/img/illustration-login.svg';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const { login } = useContext(AuthContext);
 
   const { push } = useRouter();
 
   useEffect(() => {
-    const { "salvalink.token": token } = parseCookies();
+    const { 'salvalink.token': token } = parseCookies();
     if (token) {
-      push("/");
+      push('/');
     }
   }, [push]);
 
@@ -91,7 +91,7 @@ export default function Login() {
                 </button>
                 <input
                   className="bg-zinc-600 rounded px-5 h-14 w-full pl-11 placeholder-gray-700"
-                  type={isVisiblePassword ? "text" : "password"}
+                  type={isVisiblePassword ? 'text' : 'password'}
                   placeholder="Senha"
                   value={password}
                   id="loginPassword"
@@ -100,7 +100,7 @@ export default function Login() {
               </label>
 
               <span className="text-black-900 text-center">
-                Não tem conta?{" "}
+                Não tem conta?{' '}
                 <Link className="font-semibold" href="/register">
                   Cadastre-se
                 </Link>

@@ -7,7 +7,6 @@
     "build": "npx tsc",
     "start": "node ./build/server.js",
     "dev": "ts-node-dev ./src/server.ts",
-    "start:docker": "npm run db:create && npm start",
     "lint": "eslint ./src --ext .ts",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:create": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",

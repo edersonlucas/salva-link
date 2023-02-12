@@ -18,6 +18,7 @@
     "react/jsx-props-no-spreading": "off",
     "no-param-reassign": "off",
     "operator-linebreak": "off",
+    "react/require-default-props": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],

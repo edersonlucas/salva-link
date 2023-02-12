@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { FormEvent, useState, useContext, useEffect } from 'react';
 import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
-import { Eye, EyeSlash, Envelope, Lock } from 'phosphor-react';
+import { Envelope } from 'phosphor-react';
+import InputPassword from '@/components/inputPassword';
 import { AuthContext } from '../contexts/AuthContext';
 import Logo from '../assets/img/logo.svg';
 import IllustrationLogin from '../assets/img/illustration-login.svg';
@@ -12,7 +13,6 @@ import IllustrationLogin from '../assets/img/illustration-login.svg';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const { login } = useContext(AuthContext);
 
   const { push } = useRouter();
@@ -73,32 +73,7 @@ export default function Login() {
                   id="loginEmail"
                 />
               </label>
-              <label className="relative" htmlFor="loginPassword">
-                <Lock
-                  className="text-zinc-800 absolute left-3 bottom-[.9rem]"
-                  size={25}
-                />
-                <button
-                  onClick={() => setIsVisiblePassword(!isVisiblePassword)}
-                  type="button"
-                  className="text-zinc-800 absolute right-3 bottom-[.9rem]"
-                >
-                  {isVisiblePassword ? (
-                    <Eye size={26} />
-                  ) : (
-                    <EyeSlash size={26} />
-                  )}
-                </button>
-                <input
-                  className="bg-zinc-600 rounded px-5 h-14 w-full pl-11 placeholder-gray-700"
-                  type={isVisiblePassword ? 'text' : 'password'}
-                  placeholder="Senha"
-                  value={password}
-                  id="loginPassword"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </label>
-
+              <InputPassword password={password} setPassword={setPassword} />
               <span className="text-black-900 text-center">
                 Não tem conta?{' '}
                 <Link className="font-semibold" href="/register">

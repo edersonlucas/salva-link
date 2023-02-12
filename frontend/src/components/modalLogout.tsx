@@ -10,8 +10,8 @@ export default function ModalLogout(props: IModalLogoutProps) {
 
   const { setModalIsOpen } = props;
   return (
-    <div className="fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
-      <div className="fixed inset-0 z-50 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-56 flex m-auto">
+    <div className="z-50 fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
+      <div className="fixed inset-0 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-56 flex m-auto">
         <div className="bg-zinc-900 p-5 w-full h-full max-w-md m-auto flex flex-col rounded-lg items-center justify-center">
           <div className="p-8 w-full max-w-md m-auto flex flex-col rounded-lg items-center">
             <h3 className="text-base lg:text-xl mb-4 text-center">

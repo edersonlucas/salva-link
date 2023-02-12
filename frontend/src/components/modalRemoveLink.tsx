@@ -20,9 +20,9 @@ export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
+    <div className="z-50  fixed inset-0 bg-zinc-200 bg-opacity-30 w-screen h-screen">
       <form
-        className="fixed inset-0 z-50 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-72 lg:h-56 flex m-auto rounded-md"
+        className="fixed inset-0 overflow-auto text-white-900 p-2 max-w-[500px] w-full h-72 lg:h-56 flex m-auto rounded-md"
         onSubmit={handleSubmit}
       >
         <div className="bg-zinc-900 p-8 w-full h-full max-w-md m-auto flex flex-col rounded-lg items-center justify-center">

@@ -1,11 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
-import UserPayloadDTO from '../dto/UserPayloadDTO';
+import { NextFunction, Response } from 'express';
 import LinkService from '../services/LinkService';
 import ErrorGenerator from '../utils/ErrorGenerator';
-
-interface RequestUser extends Request {
-  user: UserPayloadDTO;
-}
+import IRequestUser from '../interfaces/IRequestUser';
 
 export default class LinkController {
   private service: LinkService;
@@ -18,7 +14,7 @@ export default class LinkController {
     this.remove = this.remove.bind(this);
   }
 
-  public async getAll(req: RequestUser, res: Response, next: NextFunction) {
+  public async getAll(req: IRequestUser, res: Response, next: NextFunction) {
     try {
       const userId = req.user.sub;
       const links = await this.service.getAll(userId);
@@ -28,7 +24,7 @@ export default class LinkController {
     }
   }
 
-  public async create(req: RequestUser, res: Response, next: NextFunction) {
+  public async create(req: IRequestUser, res: Response, next: NextFunction) {
     try {
       const userId = req.user.sub;
       const newLink = await this.service.create({ ...req.body }, userId);
@@ -38,7 +34,7 @@ export default class LinkController {
     }
   }
 
-  public async update(req: RequestUser, res: Response, next: NextFunction) {
+  public async update(req: IRequestUser, res: Response, next: NextFunction) {
     try {
       const userId = req.user.sub;
       const { id } = req.params;
@@ -54,7 +50,7 @@ export default class LinkController {
     }
   }
 
-  public async remove(req: RequestUser, res: Response, next: NextFunction) {
+  public async remove(req: IRequestUser, res: Response, next: NextFunction) {
     try {
       const userId = req.user.sub;
       const { id } = req.params;

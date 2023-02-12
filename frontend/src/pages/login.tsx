@@ -5,7 +5,7 @@ import { FormEvent, useState, useContext, useEffect } from 'react';
 import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 import { Envelope } from 'phosphor-react';
-import InputPassword from '@/components/inputPassword';
+import InputPassword from '../components/inputPassword';
 import { AuthContext } from '../contexts/AuthContext';
 import Logo from '../assets/img/logo.svg';
 import IllustrationLogin from '../assets/img/illustration-login.svg';

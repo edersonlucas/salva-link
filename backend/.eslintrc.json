@@ -18,6 +18,7 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "class-methods-use-this": "off",
     "quotes": [2, "single", { "avoidEscape": true }],
     "no-console": "off",
     "import/no-extraneous-dependencies": ["off"],

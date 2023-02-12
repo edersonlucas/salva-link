@@ -1,18 +1,28 @@
 import { NextFunction, Request, Response } from 'express';
-import IBlog from '../interfaces/IBlog';
 import BlogService from '../services/BlogService';
 
 export default class BlogController {
   private service: BlogService;
 
-  constructor(public blog: IBlog) {
-    this.service = new BlogService(blog);
-    this.get = this.get.bind(this);
+  constructor() {
+    this.service = new BlogService();
+    this.getAll = this.getAll.bind(this);
+    this.getBlogLinks = this.getBlogLinks.bind(this);
   }
 
-  public async get(_req: Request, res: Response, next: NextFunction) {
+  public async getAll(_req: Request, res: Response, next: NextFunction) {
     try {
-      const links = await this.service.get();
+      const blogs = await this.service.getAll();
+      return res.status(200).json(blogs);
+    } catch (err) {
+      return next(err);
+    }
+  }
+
+  public async getBlogLinks(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { name } = req.params;
+      const links = await this.service.getBlogLinks(name);
       return res.status(200).json(links);
     } catch (err) {
       return next(err);

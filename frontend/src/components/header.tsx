@@ -53,10 +53,15 @@ export default function Header() {
           <Link href="/">
             <Image src={LogoWhite} alt="Logo SalvaLink" width={70} />
           </Link>
-          <span className="flex">
+          <Link
+            className={`flex hover:opacity-90 ${
+              pathname === '/user' && 'bg-blue-600 p-2 rounded-md shadow'
+            }`}
+            href="/user"
+          >
             <User size={23} />
             {user?.username}
-          </span>
+          </Link>
         </div>
         <button
           type="button"
@@ -70,7 +75,7 @@ export default function Header() {
           <Link
             href="/"
             className={`hover:opacity-90 ${
-              pathname === '/' && 'bg-blue-600 px-3 rounded-md'
+              pathname === '/' && 'bg-blue-600 px-3 rounded-md shadow'
             } `}
           >
             Início
@@ -78,7 +83,8 @@ export default function Header() {
           <Link
             href="/suggestions"
             className={`hover:opacity-90 ${
-              pathname === '/suggestions' && 'bg-blue-600 px-3 rounded-md'
+              pathname === '/suggestions' &&
+              'bg-blue-600 px-3 rounded-md shadow'
             } `}
           >
             Sugestões
@@ -101,7 +107,7 @@ export default function Header() {
               onClick={() => setIsOpenMenu(!isOpenMenu)}
               href="/"
               className={`hover:opacity-90 ${
-                pathname === '/' && 'bg-blue-700 px-20 rounded-md'
+                pathname === '/' && 'bg-blue-700 px-20 rounded-md shadow'
               } `}
             >
               Início
@@ -110,7 +116,8 @@ export default function Header() {
               onClick={() => setIsOpenMenu(!isOpenMenu)}
               href="/suggestions"
               className={`hover:opacity-90 ${
-                pathname === '/suggestions' && 'bg-blue-700 px-20 rounded-md'
+                pathname === '/suggestions' &&
+                'bg-blue-700 px-20 rounded-md shadow'
               } `}
             >
               Sugestões

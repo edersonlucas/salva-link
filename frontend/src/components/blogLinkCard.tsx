@@ -8,11 +8,11 @@ import characterLimit from '../util/characterLimit';
 import ILink from '../interfaces/ILink';
 import { GlobalContext } from '../contexts/GlobalContext';
 
-interface ILinkBlogCardProps {
+interface IBlogLinkCardProps {
   data: ILink;
 }
 
-export default function LinkBlogCard(props: ILinkBlogCardProps) {
+export default function BlogLinkCard(props: IBlogLinkCardProps) {
   const { data } = props;
 
   const [linkIsCopied, setLinkIsCopied] = useState(false);
@@ -31,12 +31,8 @@ export default function LinkBlogCard(props: ILinkBlogCardProps) {
     }, 1000);
   };
 
-  const handleAddLink = async () => {
-    try {
-      await addNewLink(data);
-    } catch (e) {
-      /* empty */
-    }
+  const handleSaveLink = async () => {
+    await addNewLink(data, 'save');
   };
 
   return (
@@ -86,7 +82,7 @@ export default function LinkBlogCard(props: ILinkBlogCardProps) {
               ? 'w-full lg:h-20 lg:w-32 flex justify-center items-center text-sm lg:text-base p-1 rounded-sm bg-orange-700'
               : 'w-full lg:h-20 lg:w-32 flex justify-center items-center text-sm lg:text-base p-1 rounded-sm bg-green-700 hover:bg-green-800 transition-colors'
           }`}
-          onClick={handleAddLink}
+          onClick={handleSaveLink}
           disabled={linkIsSalved}
         >
           {linkIsSalved ? (

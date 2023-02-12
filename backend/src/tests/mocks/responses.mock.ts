@@ -9,6 +9,9 @@ const emailIsRequired = { message: '"email" is required' };
 const emailFormatInvalid = { message: '"email" must be a valid email' };
 const internalServerError = { message: 'Internal Server Error!' };
 const blogNotFound = { message: 'Blog not found' };
+const passwordSameAsAbove = {
+  message: 'The password cannot be the same as the previous one',
+};
 
 export {
   incorrectEmailOrPassword,
@@ -22,4 +25,5 @@ export {
   internalServerError,
   tokenNotFound,
   blogNotFound,
+  passwordSameAsAbove,
 };

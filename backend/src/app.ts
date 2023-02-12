@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRouter from './routes/AuthRouter';
 import blogRouter from './routes/BlogRouter';
 import linkRouter from './routes/LinkRouter';
+import userRouter from './routes/UserRouter';
 import ErrorMiddleware from './middlewares/ErrorMiddleware';
 
 const app = express();
@@ -20,6 +21,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(authRouter);
 app.use('/link', linkRouter);
 app.use('/blog', blogRouter);
+app.use('/user', userRouter);
 
 app.use(ErrorMiddleware.error);
 

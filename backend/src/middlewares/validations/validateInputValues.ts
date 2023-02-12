@@ -1,5 +1,10 @@
 import { ValidationError } from 'joi';
-import { registerSchema, loginSchema, linkSchema } from './schemas';
+import {
+  registerSchema,
+  loginSchema,
+  linkSchema,
+  passwordUpdateSchema,
+} from './schemas';
 import ErrorGenerator from '../../utils/ErrorGenerator';
 import LoginDTO from '../../dto/LoginDTO';
 import RegisterDTO from '../../dto/RegisterDTO';
@@ -28,4 +33,14 @@ const validateLink = (data: LinkDTO): void => {
   returnError(error);
 };
 
-export { validateRegister, validateLogin, validateLink };
+const validateUpdatePassword = (password: string): void => {
+  const { error } = passwordUpdateSchema.validate(password);
+  returnError(error);
+};
+
+export {
+  validateRegister,
+  validateLogin,
+  validateLink,
+  validateUpdatePassword,
+};

@@ -12,4 +12,9 @@ const createMock = {
   password: '$2y$10$gDzp7Oez0cvzPt50k7NyNOEAsbbXrw5Bjdz1bSBckWU71mtjtsB0e',
 };
 
-export { findOneMock, createMock };
+const getUserMock = {
+  username: 'edersonlucas',
+  email: 'edersonlucas@outlook.com',
+};
+
+export { findOneMock, createMock, getUserMock };

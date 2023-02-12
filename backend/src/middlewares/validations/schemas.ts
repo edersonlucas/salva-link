@@ -16,4 +16,8 @@ const linkSchema = Joi.object({
   link: Joi.string().min(5).required(),
 });
 
-export { registerSchema, loginSchema, linkSchema };
+const passwordUpdateSchema = Joi.object({
+  password: Joi.string().min(3).required(),
+});
+
+export { registerSchema, loginSchema, linkSchema, passwordUpdateSchema };

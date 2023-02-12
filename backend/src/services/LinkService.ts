@@ -34,7 +34,7 @@ export default class LinkService {
   }
 
   public async update(
-    data: ILink,
+    data: LinkDTO,
     id: number,
     userId: number,
   ): Promise<number> {

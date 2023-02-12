@@ -26,6 +26,20 @@ services:
       - salvalink_net
     restart: always
 
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    working_dir: /frontend
+    ports:
+      - 3000:3000
+    env_file: .env
+    platform: linux/x86_64
+    depends_on:
+      - backend
+    networks:
+      - salvalink_net
+    restart: always
+
 networks:
   salvalink_net:
     driver: bridge

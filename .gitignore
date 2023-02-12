@@ -3,6 +3,7 @@
 /backend/build
 /backend/.env
 /backend/.nyc_output
+/backend/fly.toml
 
 /frontend/node_modules
 /frontend/dist

@@ -46,6 +46,7 @@ export default function ModalLinks(props: ModalLinksProps) {
       .get(`/blog/${blogName}`, { headers: { Authorization: token } })
       .then((response) => {
         setIsSearching(false);
+        setErrorIsOccurring(false);
         setBlogLinks(response.data);
       })
       .catch((err) => {

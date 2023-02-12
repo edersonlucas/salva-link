@@ -1,7 +1,7 @@
 on: [push, pull_request]
 
 jobs:
-  eslint:
+  backend-eslint:
     runs-on: ubuntu-latest
     steps:
       - name: Check the Git repository.
@@ -17,7 +17,7 @@ jobs:
 
       - name: Running lint to check for errors.
         run: npx eslint ./backend/src --ext .ts
-  tests:
+  backend-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check the Git repository
@@ -33,3 +33,19 @@ jobs:
 
       - name: Running the integration tests.
         run: npm run test --prefix ./backend
+  frontend-eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the Git repository.
+        uses: actions/checkout@v2
+
+      - name: Install node with version.
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Installing the dependencies.
+        run: npm install --prefix ./frontend
+
+      - name: Running lint to check for errors.
+        run: npx eslint ./frontend/src --ext .tsx --ext .ts

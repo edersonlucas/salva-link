@@ -9,5 +9,16 @@ const devgoMock = [
   },
 ];
 
-// eslint-disable-next-line import/prefer-default-export
-export { devgoMock };
+const blogsMock = [
+  {
+    name: 'Trybe',
+  },
+  {
+    name: 'DevGO',
+  },
+  {
+    name: 'TecnoBlog',
+  },
+];
+
+export { devgoMock, blogsMock };

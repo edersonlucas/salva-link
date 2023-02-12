@@ -8,6 +8,7 @@ const failedRemoveLink = { message: 'Failed to remove link' };
 const emailIsRequired = { message: '"email" is required' };
 const emailFormatInvalid = { message: '"email" must be a valid email' };
 const internalServerError = { message: 'Internal Server Error!' };
+const blogNotFound = { message: 'Blog not found' };
 
 export {
   incorrectEmailOrPassword,
@@ -20,4 +21,5 @@ export {
   emailFormatInvalid,
   internalServerError,
   tokenNotFound,
+  blogNotFound,
 };

@@ -9,13 +9,15 @@ export default class BlogService {
   private model = Blog;
 
   public async getAll(): Promise<IBlog[]> {
-    const blogs = await this.model.findAll();
+    const blogs = await this.model.findAll({
+      attributes: ['name'],
+    });
     return blogs;
   }
 
   public async getBlogLinks(name: string): Promise<ILink[]> {
     const blog: IBlogScraping = scraping[name?.toLocaleLowerCase()];
-    if (!blog) throw new ErrorGenerator(404, 'Blog not found.');
+    if (!blog) throw new ErrorGenerator(404, 'Blog not found');
     const links = await blog.get();
     return links;
   }

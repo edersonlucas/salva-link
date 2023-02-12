@@ -1,9 +1,6 @@
-import { Dispatch, FormEvent, SetStateAction, useContext } from "react";
-import { GlobalContext } from "@/contexts/GlobalContext";
-import ILink from "../interfaces/ILink";
-import api from "../services/api";
-import { toast } from "react-toastify";
-import { parseCookies } from "nookies";
+import { Dispatch, FormEvent, SetStateAction, useContext } from 'react';
+import { GlobalContext } from '../contexts/GlobalContext';
+import ILink from '../interfaces/ILink';
 
 interface IModalRemoveLinkProps {
   linkSelected: ILink | null;
@@ -11,28 +8,15 @@ interface IModalRemoveLinkProps {
 }
 
 export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
-  const { links, setLinks } = useContext(GlobalContext);
+  const { removeLink } = useContext(GlobalContext);
 
   const { setModalRemoveIsOpen, linkSelected } = props;
 
-  const handleSubmit = (event: FormEvent) => {
-    const { "salvalink.token": token } = parseCookies();
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    api
-      .delete(`/link/${linkSelected?.id}`, {
-        headers: { Authorization: token },
-      })
-      .then((_response) => {
-        const updatedLinks = links.filter(
-          (item) => item.id !== linkSelected?.id
-        );
-        setLinks(updatedLinks);
-        toast.success("Link removido com sucesso!");
-        setModalRemoveIsOpen(false);
-      })
-      .catch((_err) => {
-        toast.error("Ocorreu algum erro!");
-      });
+    await removeLink(Number(linkSelected?.id)).then(() =>
+      setModalRemoveIsOpen(false),
+    );
   };
 
   return (
@@ -54,6 +38,7 @@ export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
                 SIM, QUERO REMOVER
               </button>
               <button
+                type="button"
                 className="bg-orange-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm hover:bg-orange-800 transition-colors"
                 onClick={() => setModalRemoveIsOpen(false)}
               >

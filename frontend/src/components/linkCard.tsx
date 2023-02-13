@@ -32,7 +32,7 @@ export default function LinkCard(props: ILinkCardProps) {
       <CopyToClipboard text={data.link} onCopy={handleCopyKey}>
         <button
           type="button"
-          className="bg-blue-700 lg:h-20 w-full lg:w-40 text-sm lg:text-base p-1 lg:p-2 rounded-sm flex items-center justify-center mb-3 lg:mb-0 hover:bg-blue-800 transition-colors"
+          className="bg-blue-700 lg:h-20 w-full lg:w-40 text-sm lg:text-base p-1 lg:p-2 rounded-sm flex items-center justify-center mb-3 lg:mb-0 enabled:hover:bg-blue-800 transition-colors disabled:opacity-90"
           disabled={linkIsCopied}
         >
           {linkIsCopied ? (

@@ -64,7 +64,8 @@ export default function ModalAddLink(props: IModalEditLinkProps) {
           </div>
           <button
             type="submit"
-            className="bg-green-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm hover:bg-green-800 transition-colors"
+            className="bg-green-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-green-800 transition-colors disabled:opacity-40"
+            disabled={!title || !link}
           >
             ADICIONAR
           </button>

@@ -7,7 +7,8 @@ import { GlobalContext } from '../contexts/GlobalContext';
 import Header from '../components/header';
 import LinkCard from '../components/linkCard';
 import ModalAddLink from '../components/modalAddLink';
-import IllustrationNotFoundLink from '../assets/img/illustation-home-not-found-links.svg';
+import IllustrationNotFoundLink from '../assets/img/illustration-home-not-found-links.svg';
+import IllustrationSearch from '../assets/img/illustration-search.svg';
 import Footer from '../components/footer';
 
 export default function Home() {
@@ -75,8 +76,8 @@ export default function Home() {
                   .map((link) => <LinkCard key={link.id} data={link} />)
               ) : (
                 <div className="flex flex-col justify-end h-[60vh] items-center gap-6">
-                  <h1 className="text-2xl text-white-900">
-                    Você ainda não salvou nenhum link...
+                  <h1 className="text-xl lg:text-2xl text-white-900 text-center">
+                    Você ainda não salvou nenhum link.
                   </h1>
                   <Image
                     src={IllustrationNotFoundLink}
@@ -85,6 +86,24 @@ export default function Home() {
                   />
                 </div>
               )}
+              {links.length
+                ? links.filter(
+                    (link) =>
+                      link.title.toLowerCase().includes(search.toLowerCase()) ||
+                      link.link.toLowerCase().includes(search.toLowerCase()),
+                  ).length === 0 && (
+                    <div className="flex flex-col justify-end h-[60vh] items-center gap-6">
+                      <h1 className="text-xl lg:text-2xl text-white-900 text-center">
+                        Não foi encontrado nenhum resultado para sua busca.
+                      </h1>
+                      <Image
+                        src={IllustrationSearch}
+                        alt="Illustration Search"
+                        width={500}
+                      />
+                    </div>
+                  )
+                : ''}
             </div>
           </div>
           {modalAddIsOpen && (

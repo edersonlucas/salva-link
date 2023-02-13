@@ -19,6 +19,7 @@
     "no-param-reassign": "off",
     "operator-linebreak": "off",
     "react/require-default-props": "off",
+    "indent": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],

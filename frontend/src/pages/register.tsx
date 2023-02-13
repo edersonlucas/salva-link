@@ -98,8 +98,9 @@ export default function Register() {
                 </Link>
               </span>
               <button
-                className="text-white-900 text-sm w-full mt-2 bg-blue-900 uppercase py-4 rounded hover:bg-blue-800 transition-colors"
+                className="text-white-900 text-sm w-full mt-2 bg-blue-900 uppercase py-4 rounded enabled:hover:bg-blue-800 transition-colors disabled:opacity-40"
                 type="submit"
+                disabled={!username || !email || !password}
               >
                 CADASTRAR
               </button>

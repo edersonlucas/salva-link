@@ -49,8 +49,9 @@ export function GlobalProvider({ children }: IProviderProps) {
           if (type !== 'save') {
             const { status } = response;
             toast.success(AddMessage[status]);
+          } else {
+            toast.success('Link salvo com sucesso!');
           }
-          toast.success('Link salvo com sucesso!');
         })
         .catch((err) => {
           const { status } = err.response;

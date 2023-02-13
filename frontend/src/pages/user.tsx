@@ -107,7 +107,7 @@ export default function User() {
                   )}
                   <button
                     type="submit"
-                    className="text-white-900 text-sm w-full bg-green-700 uppercase py-2 lg:py-4 rounded hover:bg-green-800 transition-colors"
+                    className="text-white-900 text-sm w-full bg-green-700 uppercase py-2 lg:py-4 rounded enabled:hover:bg-green-800 transition-colors disabled:opacity-40"
                     disabled={
                       isPasswordAreTheSame || !password || !repeatPassword
                     }

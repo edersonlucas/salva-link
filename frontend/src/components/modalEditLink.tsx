@@ -29,6 +29,9 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
     }
   }, [linkSelected]);
 
+  const isTheSameBefore =
+    linkSelected?.link === link && linkSelected?.title === title;
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
@@ -73,7 +76,8 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
           </div>
           <button
             type="submit"
-            className="bg-orange-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm hover:bg-orange-800 transition-colors"
+            className="bg-orange-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-orange-800 transition-colors disabled:opacity-40"
+            disabled={isTheSameBefore || !title || !link}
           >
             SALVAR
           </button>

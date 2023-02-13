@@ -14,6 +14,11 @@ export default async function Browser(URL: string): Promise<{
     ],
   });
   const page = await browser.newPage();
+  await page.setViewport({
+    width: 1366,
+    height: 768,
+    deviceScaleFactor: 1,
+  });
   await page.goto(URL);
   return {
     page,

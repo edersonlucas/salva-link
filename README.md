@@ -12,7 +12,7 @@
 
 ## 📋 Objetivo
 
-O objetivo da aplicação é fornecer aos usuários uma maneira fácil e rapida de acessar os links favoritos. Em vez de ter que digitar manualmente o endereço URL ou procurá-lo na lista de favoritos, os usuários podem simplesmente clicar em um link salvo na aplicação. Além disso, a aplicação pode oferecer recursos adicionais, como a capacidade de copiar link, editar, remover, fazer buscas por algum termo que esteja no título ou no link, também tem 3 robôs que visitam 3 blogs diferentes para pegar suas últimas matérias sobre tecnologia como sugestões para o usuário salvar. O objetivo final é ajudar os usuários a economizar tempo e tornar a navegação na web mais eficiente e organizada.
+O objetivo da aplicação é fornecer aos usuários uma maneira fácil e rápida de acessar os seus links favoritos. Em vez de ter que digitar manualmente o endereço URL ou procurá-lo na lista de favoritos, os usuários podem simplesmente clicar em um link salvo na aplicação. Além disso, a aplicação pode oferecer recursos adicionais, como a capacidade de copiar link, editar, remover, fazer buscas por algum termo que esteja no título ou no link, também tem 3 robôs que visitam 3 blogs diferentes para pegar suas últimas matérias sobre tecnologia como sugestões para o usuário salvar. O objetivo final é ajudar os usuários a economizar tempo e tornar a navegação na web mais eficiente e organizada.
 
 #### Funcionalidades
 
@@ -99,13 +99,13 @@ cd salva-link
 
 **#Rode o seguinte comando para subir os containers (Pode demorar alguns minutos ☕)**[](https://emojipedia.org/pt/café/)
 
-    docker compose up --build
-**#Após isso você deve criar o banco de dados para isso, use os seguintes comandos:**
+    docker compose up --build**#Após isso você deve criar o banco de dados para isso, use os seguintes comandos:**
 
 ```
 docker exec -it backend /bin/sh
 npm run db:create
 ```
+
 **#Se você precisar resetar o banco de dados pode usar o seguinte comando:**
 
 ```
@@ -128,7 +128,9 @@ npm run test:coverage
 Documentação: https://salvalinkbackend.fly.dev/api-docs/
 
 ![SALVA-LINK](screenshots/Swagger.png)
+
 ### 🧪 Testes
+
 ![SALVA-LINK](screenshots/Tests.png)
 ![SALVA-LINK](screenshots/Coverage.png)
 

@@ -6,7 +6,7 @@ export default class TrybeBlogScraping {
   static async get() {
     const { page, browser } = await Browser('https://blog.betrybe.com/');
     try {
-      await page.waitForSelector('.cs-container', { timeout: 4000 });
+      await page.waitForSelector('.cs-container', { timeout: 15000 });
       const links: ILink[] = await page.evaluate(() => {
         const cards = Array.from(document.querySelectorAll('.entry-preview'));
         return cards.map((card) => ({

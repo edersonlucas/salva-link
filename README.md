@@ -1,7 +1,3 @@
-```
-
-```
-
 <h1 align="center">
     <img alt="SALVA LINK" src="screenshots/banner.png" width="100%" />
     <br>
@@ -9,6 +5,9 @@
 <h4 align="center">
   Bem-vindo(a) ao repositório da aplicação Salva Link
 </h4>
+
+
+
 
 ## 📋 Objetivo
 
@@ -26,8 +25,6 @@ O objetivo da aplicação é fornecer aos usuários uma maneira fácil e rápida
   - Salvar links de blogs sugeridos;
   - Filtrar por palavra que contenha tanto no link quanto no titulo;
   - Alterar sua senha.
-
-![SALVA-LINK](screenshots/Login.png)
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -75,8 +72,6 @@ O projeto está estruturado em duas pastas são elas: **frontend** e **backend**
 
 ![SALVA-LINK](screenshots/DrawSQL.png)
 
-![SALVA-LINK](screenshots/Home.png)
-
 ## 🛠️ Como instalar
 
 **#Clonar este repositório**
@@ -98,8 +93,12 @@ cd salva-link
 ⚠️ **Atenção**: Você precisa ter o docker e o docker-compose instalados em sua máquina para rodar o projeto.
 
 **#Rode o seguinte comando para subir os containers (Pode demorar alguns minutos ☕)**[](https://emojipedia.org/pt/café/)
+```
+docker compose up --build
+```
+🔴O comando **"docker exec -it backend /bin/sh"** serve para você se conectar com o terminal do container. Depois que já estiver conectado não precisa mais usar😉
 
-    docker compose up --build**#Após isso você deve criar o banco de dados para isso, use os seguintes comandos:**
+**#Após isso você deve criar o banco de dados para isso, use os seguintes comandos:**
 
 ```
 docker exec -it backend /bin/sh
@@ -117,7 +116,18 @@ npm run db:reset
 ```
 npm run test:coverage
 ```
+### 👁Deploy da aplicação
 
+**link:** https://salva-link.vercel.app/
+
+**⚠️Atenção:** Ao acessar a aplicação você precisará fazer login ou criar uma conta. Você pode usar a conta abaixo. Por favor, não alterar a senha, mas se o fizer voltar a padrão. Obrigado**💜**
+
+```
+Email: teste@teste.com
+Senha: teste123
+```
+![SALVA-LINK](screenshots/Login.png)
+![SALVA-LINK](screenshots/Home.png)
 ![SALVA-LINK](screenshots/Suggestions.png)
 ![SALVA-LINK](screenshots/User.png)
 

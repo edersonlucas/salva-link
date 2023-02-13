@@ -7,24 +7,25 @@
     <br>
 </h1>
 <h4 align="center">
-  Bem-vindo(a) ao repositório da aplicação salva link
+  Bem-vindo(a) ao repositório da aplicação Salva Link
 </h4>
 
 ## 📋 Objetivo
 
-O objetivo da aplicação é fornecer aos usuários uma maneira fácil de acessar rapidamente os links das suas matérias favoritas. Em vez de ter que digitar manualmente o endereço URL ou procurá-lo na lista de favoritos, os usuários podem simplesmente clicar em um link salvado na aplicação. Além disso, a aplicação pode oferecer recursos adicionais, como a capacidade de copiar link, editar, remover, fazer buscar por algum termo que esteja no título ou link e também, tem 3 robôs que visitam 3 blogs diferentes para pegar suas últimas matérias sobre tecnologia como sugestões para o usuário salvar. O objetivo final é ajudar os usuários a economizar tempo e a tornar a navegação na web mais eficiente e organizada.
+O objetivo da aplicação é fornecer aos usuários uma maneira fácil e rapida de acessar os links favoritos. Em vez de ter que digitar manualmente o endereço URL ou procurá-lo na lista de favoritos, os usuários podem simplesmente clicar em um link salvo na aplicação. Além disso, a aplicação pode oferecer recursos adicionais, como a capacidade de copiar link, editar, remover, fazer buscas por algum termo que esteja no título ou no link, também tem 3 robôs que visitam 3 blogs diferentes para pegar suas últimas matérias sobre tecnologia como sugestões para o usuário salvar. O objetivo final é ajudar os usuários a economizar tempo e tornar a navegação na web mais eficiente e organizada.
 
 #### Funcionalidades
 
-- Cadastrar um novo usuário
-- Realizar login com usuário já existente utilizando validação de permissão de leitura, por meio de um token
+- Cadastrar um novo usuário;
+- Realizar login com usuário já existente utilizando validação de permissão de leitura, por meio de um token;
 - **Logado no sistema o usuário conseguirá**:
-  - Adicionar novos links
-  - Ler os seus links salvos
-  - Editar links existentes
-  - Remover links
-  - Salvar links de blogs sugeridos
-  - Filtrar por palavra que contenha tanto no link quanto no titulo
+  - Adicionar novos links;
+  - Ver os seus links salvos;
+  - Editar links existentes;
+  - Remover links;
+  - Salvar links de blogs sugeridos;
+  - Filtrar por palavra que contenha tanto no link quanto no titulo;
+  - Alterar sua senha.
 
 ![SALVA-LINK](screenshots/Login.png)
 
@@ -127,6 +128,7 @@ npm run test:coverage
 Documentação: https://salvalinkbackend.fly.dev/api-docs/
 
 ![SALVA-LINK](screenshots/Swagger.png)
+### 🧪 Testes
 ![SALVA-LINK](screenshots/Tests.png)
 ![SALVA-LINK](screenshots/Coverage.png)
 

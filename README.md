@@ -6,12 +6,9 @@
   Bem-vindo(a) ao repositório da aplicação Salva Link
 </h4>
 
-
-
-
 ## 📋 Objetivo
 
-O objetivo da aplicação é fornecer aos usuários uma maneira fácil e rápida de acessar os seus links favoritos. Em vez de ter que digitar manualmente o endereço URL ou procurá-lo na lista de favoritos, os usuários podem simplesmente clicar em um link salvo na aplicação. Além disso, a aplicação pode oferecer recursos adicionais, como a capacidade de copiar link, editar, remover, fazer buscas por algum termo que esteja no título ou no link, também tem 3 robôs que visitam 3 blogs diferentes para pegar suas últimas matérias sobre tecnologia como sugestões para o usuário salvar. O objetivo final é ajudar os usuários a economizar tempo e tornar a navegação na web mais eficiente e organizada.
+O objetivo da aplicação é fornecer aos usuários uma maneira fácil e rápida de salvar/acessar os seus links favoritos. Em vez de ter que digitar manualmente o endereço URL ou procurá-lo na lista de favoritos, os usuários podem simplesmente clicar em um link salvo na aplicação. Além disso, a aplicação pode oferecer recursos adicionais, como a capacidade de copiar link, editar, remover, fazer buscas por algum termo que esteja no título ou no link, também tem 3 robôs que visitam 3 blogs diferentes para pegar suas últimas matérias sobre tecnologia como sugestões para o usuário salvar. O objetivo final é ajudar os usuários a economizar tempo e tornar a navegação na web mais eficiente e organizada.
 
 #### Funcionalidades
 
@@ -93,9 +90,11 @@ cd salva-link
 ⚠️ **Atenção**: Você precisa ter o docker e o docker-compose instalados em sua máquina para rodar o projeto.
 
 **#Rode o seguinte comando para subir os containers (Pode demorar alguns minutos ☕)**[](https://emojipedia.org/pt/café/)
+
 ```
 docker compose up --build
 ```
+
 🔴O comando **"docker exec -it backend /bin/sh"** serve para você se conectar com o terminal do container. Depois que já estiver conectado não precisa mais usar😉
 
 **#Após isso você deve criar o banco de dados para isso, use os seguintes comandos:**
@@ -116,6 +115,7 @@ npm run db:reset
 ```
 npm run test:coverage
 ```
+
 ### 👁Deploy da aplicação
 
 **link:** https://salva-link.vercel.app/
@@ -126,6 +126,7 @@ npm run test:coverage
 Email: teste@teste.com
 Senha: teste123
 ```
+
 ![SALVA-LINK](screenshots/Login.png)
 ![SALVA-LINK](screenshots/Home.png)
 ![SALVA-LINK](screenshots/Suggestions.png)

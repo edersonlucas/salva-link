@@ -1,6 +1,13 @@
-import { Dispatch, FormEvent, SetStateAction, useContext } from 'react';
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useContext,
+  useState,
+} from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
 import ILink from '../interfaces/ILink';
+import Spinner from './spinner';
 
 interface IModalRemoveLinkProps {
   linkSelected: ILink | null;
@@ -8,15 +15,19 @@ interface IModalRemoveLinkProps {
 }
 
 export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { removeLink } = useContext(GlobalContext);
 
   const { setModalRemoveIsOpen, linkSelected } = props;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    await removeLink(Number(linkSelected?.id)).then(() =>
-      setModalRemoveIsOpen(false),
-    );
+    setIsLoading(true);
+    await removeLink(Number(linkSelected?.id)).then(() => {
+      setIsLoading(false);
+      setModalRemoveIsOpen(false);
+    });
   };
 
   return (
@@ -34,8 +45,10 @@ export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
               <button
                 type="submit"
                 className="bg-red-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm hover:bg-red-800 transition-colors"
+                disabled={isLoading}
               >
                 SIM, QUERO REMOVER
+                {isLoading && <Spinner />}
               </button>
               <button
                 type="button"

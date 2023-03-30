@@ -9,6 +9,7 @@ import {
 import { X } from 'phosphor-react';
 import { GlobalContext } from '../contexts/GlobalContext';
 import ILink from '../interfaces/ILink';
+import Spinner from './spinner';
 
 interface IModalEditLinkProps {
   linkSelected: ILink | null;
@@ -19,6 +20,7 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
   const { editLink } = useContext(GlobalContext);
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setModalEditIsOpen, linkSelected } = props;
 
@@ -35,9 +37,12 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
       await editLink({ id: Number(linkSelected?.id), title, link });
+      setIsLoading(false);
       setModalEditIsOpen(false);
     } catch (e) {
+      setIsLoading(false);
       setModalEditIsOpen(true);
     }
   };
@@ -77,9 +82,10 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
           <button
             type="submit"
             className="bg-orange-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-orange-800 transition-colors disabled:opacity-40"
-            disabled={isTheSameBefore || !title || !link}
+            disabled={isTheSameBefore || !title || !link || isLoading}
           >
             SALVAR
+            {isLoading && <Spinner />}
           </button>
         </div>
       </form>

@@ -7,6 +7,7 @@ import goLinkBlue from '../assets/img/go-link-blue.svg';
 import characterLimit from '../util/characterLimit';
 import ILink from '../interfaces/ILink';
 import { GlobalContext } from '../contexts/GlobalContext';
+import Spinner from './spinner';
 
 interface IBlogLinkCardProps {
   data: ILink;
@@ -17,6 +18,7 @@ export default function BlogLinkCard(props: IBlogLinkCardProps) {
 
   const [linkIsCopied, setLinkIsCopied] = useState(false);
   const [linkIsSalved, setLinkIsSalved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { addNewLink, links } = useContext(GlobalContext);
 
@@ -32,7 +34,9 @@ export default function BlogLinkCard(props: IBlogLinkCardProps) {
   };
 
   const handleSaveLink = async () => {
+    setIsLoading(true);
     await addNewLink(data, 'save');
+    setIsLoading(false);
   };
 
   return (
@@ -83,7 +87,7 @@ export default function BlogLinkCard(props: IBlogLinkCardProps) {
               : 'w-full lg:h-20 lg:w-32 flex justify-center items-center text-sm lg:text-base p-1 rounded-sm bg-green-700 hover:bg-green-800 transition-colors'
           }`}
           onClick={handleSaveLink}
-          disabled={linkIsSalved}
+          disabled={linkIsSalved || isLoading}
         >
           {linkIsSalved ? (
             <>
@@ -94,6 +98,7 @@ export default function BlogLinkCard(props: IBlogLinkCardProps) {
             <>
               SALVAR
               <PlusCircle size={30} />
+              {isLoading && <Spinner />}
             </>
           )}
         </button>

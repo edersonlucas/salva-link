@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { X } from 'phosphor-react';
 import { GlobalContext } from '../contexts/GlobalContext';
+import Spinner from './spinner';
 
 interface IModalEditLinkProps {
   setModalAddIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -16,15 +17,19 @@ export default function ModalAddLink(props: IModalEditLinkProps) {
   const { addNewLink } = useContext(GlobalContext);
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setModalAddIsOpen } = props;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
       await addNewLink({ title, link });
+      setIsLoading(false);
       setModalAddIsOpen(false);
     } catch (_err) {
+      setIsLoading(false);
       setModalAddIsOpen(true);
     }
   };
@@ -64,10 +69,11 @@ export default function ModalAddLink(props: IModalEditLinkProps) {
           </div>
           <button
             type="submit"
-            className="bg-green-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-green-800 transition-colors disabled:opacity-40"
-            disabled={!title || !link}
+            className="bg-green-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-green-800 transition-colors disabled:opacity-40 gap-2 flex justify-center"
+            disabled={!title || !link || isLoading}
           >
             ADICIONAR
+            {isLoading && <Spinner />}
           </button>
         </div>
       </form>

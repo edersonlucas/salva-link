@@ -9,13 +9,14 @@ import InputPassword from '../components/inputPassword';
 import { AuthContext } from '../contexts/AuthContext';
 import Logo from '../assets/img/logo.svg';
 import IllustrationRegister from '../assets/img/illustration-register.svg';
+import Spinner from '../components/spinner';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { register } = useContext(AuthContext);
-
   const { push } = useRouter();
 
   useEffect(() => {
@@ -27,7 +28,9 @@ export default function Register() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    setIsLoading(true);
     await register({ username, email, password });
+    setIsLoading(false);
   }
 
   return (
@@ -98,11 +101,12 @@ export default function Register() {
                 </Link>
               </span>
               <button
-                className="text-white-900 text-sm w-full mt-2 bg-blue-900 uppercase py-4 rounded enabled:hover:bg-blue-800 transition-colors disabled:opacity-40"
+                className="text-white-900 text-sm w-full mt-2 bg-blue-900 uppercase py-4 rounded enabled:hover:bg-blue-800 transition-colors disabled:opacity-40 gap-2 flex justify-center"
                 type="submit"
-                disabled={!username || !email || !password}
+                disabled={!username || !email || !password || isLoading}
               >
                 CADASTRAR
+                {isLoading && <Spinner />}
               </button>
             </form>
           </div>

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState, FormEvent } from 'react';
 import { UserCircle, EnvelopeSimple } from 'phosphor-react';
 import { parseCookies } from 'nookies';
 import { toast } from 'react-toastify';
+import Spinner from '../components/spinner';
 import IUser from '../interfaces/IUser';
 import Header from '../components/header';
 import Footer from '../components/footer';
@@ -18,6 +19,7 @@ export default function User() {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isPasswordAreTheSame = repeatPassword !== password;
 
@@ -40,6 +42,7 @@ export default function User() {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     const { 'salvalink.token': token } = parseCookies();
+    setIsLoading(true);
     api
       .put(
         '/user/changepassword',
@@ -47,11 +50,13 @@ export default function User() {
         { headers: { Authorization: token } },
       )
       .then((response) => {
+        setIsLoading(false);
         const { status } = response;
         toast.success(PasswordUpdate[status]);
         setIsChangingPassword(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         const { status } = err.response;
         toast.error(PasswordUpdate[status]);
       });
@@ -107,17 +112,22 @@ export default function User() {
                   )}
                   <button
                     type="submit"
-                    className="text-white-900 text-sm w-full bg-green-700 uppercase py-2 lg:py-4 rounded enabled:hover:bg-green-800 transition-colors disabled:opacity-40"
+                    className="text-white-900 text-sm w-full bg-green-700 uppercase py-2 lg:py-4 rounded enabled:hover:bg-green-800 transition-colors disabled:opacity-40 gap-2 flex justify-center"
                     disabled={
-                      isPasswordAreTheSame || !password || !repeatPassword
+                      isPasswordAreTheSame ||
+                      !password ||
+                      !repeatPassword ||
+                      isLoading
                     }
                   >
-                    Salvar
+                    SALVAR
+                    {isLoading && <Spinner />}
                   </button>
                   <button
                     type="button"
                     className="text-white-900 text-sm w-full bg-orange-700 uppercase py-2 lg:py-4 rounded hover:bg-orange-800 transition-colors"
                     onClick={() => setIsChangingPassword(false)}
+                    disabled={isLoading}
                   >
                     CANCELAR
                   </button>

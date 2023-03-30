@@ -60,7 +60,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - Animate.css
   - Docker
 
-## ![building_construction](https://github.githubassets.com/images/icons/emoji/unicode/1f3d7.png) Estrutura
+## [🏗️](https://emojiterra.com/pt/construcao/) Estrutura
 
 O projeto está estruturado em duas pastas são elas: **frontend** e **backend**. Unidos usando o docker-compose.
 

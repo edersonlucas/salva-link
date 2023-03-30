@@ -44,7 +44,7 @@ export default function ModalRemoveLink(props: IModalRemoveLinkProps) {
             <div className="text-white-900 flex flex-col lg:flex-row lg:gap-3">
               <button
                 type="submit"
-                className="bg-red-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm hover:bg-red-800 transition-colors"
+                className="bg-red-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm hover:bg-red-800 transition-colors gap-2 flex justify-center"
                 disabled={isLoading}
               >
                 SIM, QUERO REMOVER

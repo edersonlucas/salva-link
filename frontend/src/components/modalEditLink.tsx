@@ -81,7 +81,7 @@ export default function ModalEditLink(props: IModalEditLinkProps) {
           </div>
           <button
             type="submit"
-            className="bg-orange-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-orange-800 transition-colors disabled:opacity-40"
+            className="bg-orange-700 mt-5 text-sm lg:text-base p-2 w-full rounded-sm enabled:hover:bg-orange-800 transition-colors disabled:opacity-40 gap-2 flex justify-center"
             disabled={isTheSameBefore || !title || !link || isLoading}
           >
             SALVAR

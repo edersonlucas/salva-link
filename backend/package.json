@@ -52,7 +52,7 @@
     "joi": "^17.9.1",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "2.3.3",
-    "puppeteer": "^19.5.2",
+    "puppeteer": "^19.8.2",
     "sequelize": "^6.28.0",
     "sequelize-typescript": "^2.1.5",
     "swagger-ui-express": "^4.6.0"

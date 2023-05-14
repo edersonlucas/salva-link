@@ -15,7 +15,7 @@
     "@types/react-dom": "18.0.11",
     "animate.css": "^4.1.1",
     "axios": "^1.4.0",
-    "eslint-config-next": "13.4.1",
+    "eslint-config-next": "13.4.2",
     "jwt-decode": "^3.1.2",
     "next": "13.4.1",
     "nookies": "^2.5.2",

@@ -55,6 +55,6 @@
     "puppeteer": "^20.2.0",
     "sequelize": "^6.31.1",
     "sequelize-typescript": "^2.1.5",
-    "swagger-ui-express": "^4.6.2"
+    "swagger-ui-express": "^5.0.0"
   }
 }
